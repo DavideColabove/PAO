@@ -8,12 +8,12 @@ Benvenuti nel mio repository dedicato alla **Programmazione ad Oggetti (PAO)**! 
 
 ## 📜 Indice
 
-- [Descrizione](#descrizione)
-- [Struttura del Progetto](#struttura-del-progetto)
-- [Tecnologie Usate](#tecnologie-usate)
-- [Come Iniziare](#come-iniziare)
-- [Contributi](#contributi)
-- [Contatti](#contatti)
+- [Descrizione](#-descrizione)
+- [Struttura del Progetto](#-struttura-del-progetto)
+- [Tecnologie Usate](#-tecnologie-usate)
+- [Come Iniziare](#-come-iniziare)
+- [Contributi](#-contributi)
+- [Contatti](#-contatti)
 
 ---
 
