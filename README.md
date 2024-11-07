@@ -54,3 +54,21 @@ Ecco una panoramica delle principali cartelle e file:
 ```bash
 git clone https://github.com/tuo-username/pao-project.git
 cd pao-project
+
+### 2. Esplora i progetti
+
+Ogni progetto è contenuto nella propria cartella sotto `src/`. Leggi il README specifico di ogni progetto per maggiori dettagli.
+
+---
+
+## 🤝 Contributi
+
+- **Davide** - [GitHub](https://github.com/tuo-username)
+
+---
+
+## 📬 Contatti
+
+- **Email**: [email-placeholder@example.com]
+- **LinkedIn**: [https://linkedin.com/in/link-placeholder](https://linkedin.com/in/link-placeholder)
+- **GitHub**: [https://github.com/tuo-username](https://github.com/tuo-username)
