@@ -70,6 +70,6 @@ Ogni progetto è contenuto nella propria cartella sotto `src/`. Leggi il README 
 
 ## 📬 Contatti
 
-- **Email**: [email-placeholder@example.com](davide.colabove@studenti.unipd.it)
-- **LinkedIn**: [https://linkedin.com/in/link-placeholder](https://www.linkedin.com/in/davide-colabove-110678300/)
-- **X**: [https://x.com/tuo-username](https://x.com/ColaboveDavide)
+- **Email**: [davide.colabove@studenti.unipd.it]
+- **LinkedIn**: [https://www.linkedin.com/in/davide-colabove-110678300/]
+- **X**: [https://x.com/ColaboveDavide]
