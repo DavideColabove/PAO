@@ -36,6 +36,7 @@ Ecco una panoramica delle principali cartelle e file:
 - **`docs/`**: Documentazione per ogni progetto, inclusi UML e descrizioni dettagliate.
 - **`tests/`**: Test unitari per validare il codice.
 - **`examples/`**: Esempi di utilizzo delle classi e delle funzioni principali.
+- **`tutorato/`**: Esercizi disponibili nel tutorato del corso PAO.
 
 ---
 
