@@ -1,10 +1,12 @@
 //Template di classe coda
 #include <iostream>
+#ifndef QUEUE_H
+#define QUEUE_H
 
 template <class T>
 class QueueItem{
     public:
-        QueueItem(const T&);
+        QueueItem(const T&): info(val), next(nullptr){}
         T info;
         QueueItem* next;
 };
@@ -12,7 +14,7 @@ class QueueItem{
 template <class T>
 class Queue{
     public:
-        Queue();
+        Queue(): primo(nullptr), ultimo(nullptr){}
         ~Queue();
         Queue(const Queue&);        //copia profonda
         Queue& operator=(const Queue&); //assegnazione profonda
@@ -20,17 +22,25 @@ class Queue{
         void add (const T&);
         T remove();
     private:
-        QueueItem<T>* primo;
-        QueueItem<T>* ultimo;
+        QueueItem<T>* primo;        //primo elemento della coda
+        QueueItem<T>* ultimo;       //ultimo elemento della coda
 };
 
 template <class T>
-Queue<T>::Queue() : primo(0), ultimo(0){}
-
-int main(){
-    //SOLO istanziazione ESPLICITA
-    Queue<int> qi;
-    Queue<boolletta> qb;
-    Queue<string> qs;
+bool Queue<T>::empty() const{
+    return (primo == nullptr);
 }
+
+template <class T>
+void Queue<T>::add(const T& val){
+    if(empty())
+        primo = ultimo = new QueueItem<T>(val);
+    else{       //aggiunge in coda
+        ultimo->next = new QueueItem<T>(val);
+        ultimo = ultimo->next;
+    }
+}
+
+
+
 
