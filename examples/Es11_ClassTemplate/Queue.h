@@ -6,7 +6,7 @@
 template <class T>
 class QueueItem{
     public:
-        QueueItem(const T&): info(val), next(nullptr){}
+        QueueItem(const T& val): info(val), next(nullptr){}
         T info;
         QueueItem* next;
 };
@@ -15,14 +15,15 @@ template <class T>
 class Queue{
     public:
         Queue(): primo(nullptr), ultimo(nullptr){}
-        ~Queue();
-        Queue(const Queue&);        //copia profonda
-        Queue& operator=(const Queue&); //assegnazione profonda
         bool empty() const;
         void add (const T&);
         T remove();
+        /* Distruttore, costruttore di copia, asssegnazione profondi!*/
+        ~Queue();
+        Queue(const Queue&);        //copia profonda
+        Queue& operator=(const Queue&); //assegnazione profonda
     private:
-        QueueItem<T>* primo;        //primo elemento della coda
+        QueueItem<T>* primo;         //primo elemento della coda
         QueueItem<T>* ultimo;       //ultimo elemento della coda
 };
 
@@ -41,6 +42,23 @@ void Queue<T>::add(const T& val){
     }
 }
 
+template <class T>
+T Queue<T>::remove(){
+    if(empty()){
+        std::cerr << "remove() su coda vuota" << std::endl;
+        exit(1);    // BAD PRACTICE, eccezione preferibile
+    }
+    QueueItem<T>* p = primo;
+    primo = primo->next;
+    T aux = p->info;
+    delete p;   // rimuovo garbage
+    return aux;
+}
 
+template <class T>
+Queue<T>::~Queue(){     // distruzione profonda
+    while(!empty())
+        remove();
+}
 
-
+#endif
