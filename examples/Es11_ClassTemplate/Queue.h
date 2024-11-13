@@ -3,8 +3,12 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+template <class T> class Queue;
+template <class T> std::ostream& operator<< (std::ostream& os, const Queue<T>&);
+
 template <class T>
 class Queue{
+    // NON agisce da dichiarazione di template di funzione
     friend std::ostream& operator<< <T> (std::ostream&, const Queue<T>&);
     public:
         Queue(): primo(nullptr), ultimo(nullptr){}
@@ -14,19 +18,18 @@ class Queue{
         /* Distruttore, costruttore di copia, asssegnazione profondi!*/
         ~Queue();
         Queue(const Queue&);        //copia profonda
-        Queue& operator=(const Queue&); //assegnazione profonda
-        
-        template <class T>
-        std::ostream& operator<<(std::ostream&, const Queue<T>&);
-
+        Queue& operator=(const Queue&); //assegnazione profonda 
     private:
         // template di classe annidato associato
         class QueueItem{    // QueueItem<T> é un tipo implicito in quanto non é un tipo completamente definito ma dipende impliciatamente dai parametri di tipo di Queue<T>  
-            friend std::ostream& operator<< <T> (std::ostream&, const QueueItem<T>&);
+            friend class Queue<T>;
+            friend std::ostream& operator<< <T> (std::ostream&, const Queue<T>&);
+            // agisce da dichiarazione di template di funzione
+            friend std::ostream& operator<< <T> (std::ostream&, const typename Queue<T>::QueueItem&);
             public:
-                T info;
-                QueueItem* next;
                 QueueItem(const T& val): info(val), next(nullptr){}
+                T info;
+                QueueItem* next;  
         };
         static int contatore;
         QueueItem<T>* primo;         //primo elemento della coda
@@ -68,7 +71,7 @@ Queue<T>::~Queue(){     // distruzione profonda
 }
 
 template <class T>
-std::ostream& operator<< <T> (std::ostream& os, const QueueItem<T>& qi){
+std::ostream& operator<< <T> (std::ostream& os, const typename Queue<T>::QueueItem& qi){
     os << qi.info;
     return os;
 }
