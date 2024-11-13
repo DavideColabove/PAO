@@ -1,6 +1,6 @@
 # 🖥️ Programmazione ad Oggetti (PAO)
 
-Benvenuti nel mio repository dedicato alla **Programmazione ad Oggetti (PAO)**! Qui troverai una collezione di progetti, esercizi e appunti riguardanti il mondo della programmazione OOP. 👨‍💻🌐
+Benvenuti nel mio repository dedicato alla **Programmazione ad Oggetti (PAO)**! Qui troverai una collezione di progetti, esercizi e appunti riguardanti il mondo della OOP. 👨‍💻🌐
 
 ---
 
