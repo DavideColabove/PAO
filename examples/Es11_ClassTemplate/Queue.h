@@ -5,14 +5,17 @@
 
 template <class T>
 class QueueItem{
-    public:
-        QueueItem(const T& val): info(val), next(nullptr){}
+    friend class QueueItem<T>;
+    friend std::ostream& operator<< <T> (std::ostream&, const QueueItem<T>&);
+    private:
         T info;
         QueueItem* next;
+        QueueItem(const T& val): info(val), next(nullptr){}
 };
 
 template <class T>
 class Queue{
+    friend std::ostream& operator<< <T> (std::ostream&, const Queue<T>&);
     public:
         Queue(): primo(nullptr), ultimo(nullptr){}
         bool empty() const;
@@ -22,7 +25,12 @@ class Queue{
         ~Queue();
         Queue(const Queue&);        //copia profonda
         Queue& operator=(const Queue&); //assegnazione profonda
+        
+        template <class T>
+        std::ostream& operator<<(std::ostream&, const Queue<T>&);
+
     private:
+        static int contatore;
         QueueItem<T>* primo;         //primo elemento della coda
         QueueItem<T>* ultimo;       //ultimo elemento della coda
 };
@@ -60,5 +68,25 @@ Queue<T>::~Queue(){     // distruzione profonda
     while(!empty())
         remove();
 }
+
+template <class T>
+std::ostream& operator<<(std::ostream& os, const QueueItem<T>& qi){
+    os << qi.info;
+    return os;
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& os, const Queue<T>& q){
+    os << " (";
+    QueueItem<T>* p = q.primo;      // amicizia con Queue
+    for (; p!= 0; p = p->next){     // amicizia con QueueItem
+        os << *p  << " ";       // operator<< per il tipo QueuItem
+    }
+    os << ")" << std::endl;
+    return os;
+}
+
+template <class T>
+int Queue<T>::contatore =0;
 
 #endif
