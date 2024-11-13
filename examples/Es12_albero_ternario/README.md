@@ -1,7 +1,8 @@
 # Descrizione esercizio
 
-Definire un template di classe albero<T> i cui oggetti rappresentano un albero 3-ario in cui i nodi memorizzano
-dei valori di tipo T ed hanno 3 figli.
+Definire un template di classe albero<T> i cui oggetti rappresentano un albero 3-ario in cui i nodi memorizzano dei valori di tipo T ed hanno 3 figli.
+
+## Richieste
 
 Il template albero<T> deve soddisfare i seguenti vincoli:
 1. costruttore di default che costruisce l'albero vuoto;
