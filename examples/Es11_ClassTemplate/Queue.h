@@ -82,7 +82,7 @@ std::ostream& operator<<(std::ostream& os, const Queue<T>& q){
     for (; p!= 0; p = p->next){     // amicizia con QueueItem
         os << *p  << " ";       // operator<< per il tipo QueuItem
     }
-    os << ")" << std::endl;
+    os << ") " << std::endl;
     return os;
 }
 
