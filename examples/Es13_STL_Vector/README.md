@@ -54,3 +54,35 @@ std::vector
 5. iterator begin() : iteratore che punta al primo elemento
 
 6. iterator end() : iteratore che putna al past-the-end
+
+## Iteratori nei contenitori
+
+Ad ogni classe contenitore C della STL sono associati due tipi iteratore
+
+```cpp
+C::iterator
+
+C::const_iterator
+```
+Si usa iterator quando si necessita un accesso in lettura e scrittua agli elementi
+Si usa const_iterator se basta un accesso come rvalue (in sola lettura)
+
+Di conseguenza su un vector<T> posso chiamare begin() e end()
+Al contrario, su un const vector<T> posso chiamare SOLO begin() const e end() const 
+
+Su ogni tipo iteratore (anche const) di qualche istanza di contenitore Cont<Tipo>::[const_]iterator sono sempre disponibili le seguenti funzionalitá: 
+
+```cpp
+Cont<Tipo> x;
+Cont<Tipo>::[const_]iterator i;
+
+x.begin();  // iteratore che punta al primo elemento
+
+x.end();    // puntatrore all'(ultimo +1) elemento 
+
+*i;         // elemento puntato da i
+
+i++; ++i;   // puntatore all'elemento successivo: se i punta all'ultimo elemento di x allora ++i == x.end()
+
+i--; --i;   // puntatore all'elemento precedente: se i punta al primo elemento di x allora i-- é indefinito (x.begin()-1)
+            // (x.end())-- punta all'ultimo elemento 
