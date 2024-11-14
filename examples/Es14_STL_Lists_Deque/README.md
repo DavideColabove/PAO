@@ -40,3 +40,23 @@ Vengono tipicamente mantenute ordinate mediante un albero
 
 Map e Multimap includono anche il valore contenuto nella chiave
 
+## Esercizio
+
+Definire un template di classe dList<T> i cui oggetti rappresentano una struttra dati lista doppiamente concatenata (doubly-linked list) per elementi di uno stesso tipo T.
+
+### Richieste
+
+Il template dList<T> deve soddisfare i seguenti vincoli:
+
+1. Gestione della memoria senza condivisione
+
+2. dList<T> rende disponibile un costruttore dList(int k, const T& t) che costruisce una lista contenente k nodi ed ognuno di questi nodi memorizza una copia di t
+
+3. dList<T> permette l'inserimento in testa ed in coda ad una lista in tempo O(1) (cioé costante):
+    1. Deve essere disponibile un metodo void insertFront(const T&) con il seguente comportamento d1.insertFront(t) inserisce l'elemento t in testa a d1 in tempo O(1)
+    
+    2. Deve essere disponibile un metodo void insertBack(const T&) con il seguente comportamento d1.insertBack(t) inserisce l'elemento t in coda a d1 in tempo O(1)
+
+4. dList<T> rende disponibile un opportuno overlading di operator< che implementa l'ordinamento lessicografico
+
+5. dList<T> rende disponibile un tipo iteratore costante dList<T>::const.iterator i cui oggetti permettono di iterare sugli elementi di una lista
