@@ -85,4 +85,5 @@ x.end();    // puntatrore all'(ultimo +1) elemento
 i++; ++i;   // puntatore all'elemento successivo: se i punta all'ultimo elemento di x allora ++i == x.end()
 
 i--; --i;   // puntatore all'elemento precedente: se i punta al primo elemento di x allora i-- é indefinito (x.begin()-1)
-            // (x.end())-- punta all'ultimo elemento 
+            // (x.end())-- punta all'ultimo elemento
+``` 
