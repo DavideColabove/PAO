@@ -68,7 +68,7 @@ Si usa iterator quando si necessita un accesso in lettura e scrittua agli elemen
 Si usa const_iterator se basta un accesso come rvalue (in sola lettura)
 
 Di conseguenza su un vector<T> posso chiamare begin() e end()
-Al contrario, su un const vector<T> posso chiamare SOLO begin() const e end() const 
+Al contrario, su un const vector<T> posso chiamare SOLO begin() const e end() const : ritornano un const_iterator
 
 Su ogni tipo iteratore (anche const) di qualche istanza di contenitore Cont<Tipo>::[const_]iterator sono sempre disponibili le seguenti funzionalitá: 
 
