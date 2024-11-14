@@ -73,6 +73,7 @@ Al contrario, su un const vector<T> posso chiamare SOLO begin() const e end() co
 Su ogni tipo iteratore (anche const) di qualche istanza di contenitore Cont<Tipo>::[const_]iterator sono sempre disponibili le seguenti funzionalitá: 
 
 ```cpp
+#include <vector>
 Cont<Tipo> x;
 Cont<Tipo>::[const_]iterator i;
 
