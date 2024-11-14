@@ -133,4 +133,42 @@ vector<string>::iterator i,j;
 v.pop_back();   // toglie l'ultimo elemento 
 v.erase(i);     // toglie l'elemento puntato da i
 v.erase(i,j);   // toglie tutti gli elementi compresi tra l'iterartore i incluso e l'iteratore j escluso
-``` 
+```
+
+Su tutti i contenitori sequenziali (vector, list, deque) sono definiti gli operatori booleani relazionali < e <=
+
+```cpp
+Cont<Tipo> x,y;
+x == y, x != y, x < y, x <= y, x > y, x >= y;
+//occorre che sul tipo base Tipo siano definiti i due operatori == e <
+// ATTENZIONE: sui map confronta le coppie (chiave,valore)
+```
+
+push_back(), pop_back() sono definiti per tutti i contenitori sequenziali;
+insert() e erase() sono definiti per tutti i contenitori
+
+In ogni contenitore sequenziale (vector, deque, list) possiamo acedere al primo ed ultimo elemento con i metodi:
+
+```cpp
+T& front();
+const T& front() const;
+
+T& back();
+const T& back() const;
+```
+
+L'overloading dell'operatore di subscripting operator[] é disponibile solo per i contenitori ad accesso casuale vector e deque
+
+```cpp
+Cont<Tipo> x;   // vector o deque
+int i = 5;
+Tipo e = x[i];  // elemento in posizione i-esima
+```
+
+Per portabilitá é preferibile utilizzare per gli indici il tipo interno al contenitore Cont<Tipo>::size_type (uint)
+
+```cpp
+Cont<Tipo> x;
+Cont<Tipo>::size_type i = 5;
+Tipo e = x[i];  // lemento in posizione i-esima
+```
