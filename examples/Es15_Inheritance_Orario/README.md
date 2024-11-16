@@ -32,6 +32,7 @@ Subtyping: Sottotipo D => Supertipo B
     1. Per oggetti: D => B     estrae il sottooggetto  
         1. "Butta via" la parte in piú (i campi dati propri della classe derivata D)  
         2. Non c'é quindi polimorfismo  
+        
     2. Per puntatori e riferimenti: D* => B*  D& => B&  
         1. Supporta il polimorfismo  
         2. Copia l'indirizzo, significa prendere un indirizzo e farlo puntare ad un oggetto   (vederlo come fosse un oggetto del supertipo) ma continua ad avere l'informazione specifica del sottotipo  
