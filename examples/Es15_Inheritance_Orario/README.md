@@ -193,4 +193,4 @@ La classe che eredita privatamente da una base dipende come implementazione (non
 Se D deriva privatamente da B significa che in D si é interessati ad aclune funzionalitá di B e non si é interessati ad una relazione concettuale di subtyping tra D e B.  
 L'ereditarietá privata eredita l'implementazione di B ma non l'interfaccia di B.   
 
-L'ereditarietá privata non gioca alcun ruolo nella fase di progettzione del software ma solo nella fase di implementazione del software.  
+L'ereditarietá privata non gioca alcun ruolo nella fase di progettazione del software ma solo nella fase di implementazione del software.  
