@@ -28,7 +28,8 @@ Ogni oggetto della classe derivata é utilizzabile anche come oggetto della clas
 
 ![Inheritance Animals](../../assets/inheritance_animals.png)
 
-Subtyping: Sottotipo D => Supertipo B  
+Subtyping: Sottotipo D => Supertipo B
+  
 1. Per oggetti: D => B     estrae il sottooggetto
     1. "Butta via" la parte in piú (i campi dati propri della classe derivata D)
     2. Non c'é quindi polimorfismo
