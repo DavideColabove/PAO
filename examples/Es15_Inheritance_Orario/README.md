@@ -25,7 +25,7 @@ L'insieme dei precedenti compone -> oggetto DataOra
 La relazione "IS-A" induce il subtyping che é la caratteristica fondamentale dell'ereditarietá:
 Ogni oggetto della classe derivata é utilizzabile anche come oggetto della classe base
 
-![Inheritance Animals](./Es_PAO/assets/inheritance_animals.png)
+![Inheritance Animals](../../assets/inheritance_animals.png)
 
 
 ## Esercizio
