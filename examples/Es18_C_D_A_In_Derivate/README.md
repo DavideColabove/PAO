@@ -76,3 +76,33 @@ Il costruttore di copia standard chiama il costruttore di copia anche per il sot
 Se viene ridefinito a fini di tracciamento deve essere ridefinito analogamente al costruttore di copia standard, di seguito un esempio
 
 ![Costruttore di copia](../../assets/C_copia.png)
+
+
+### Assegnazione standard nelle classi derivate
+
+Se viene ridefinita, la responsabilitá della correttezza é completamente a carico del programmatore  
+Non c'é lista di inizializzazione
+
+Nella classe derivata per il sottoogetto -> assegnazione, per i campi dati -> assegnazione
+Puó quindi essere in versione standard o ridefinita dal programmatore
+
+![Assegnazione](../../assets/Assegnazione_derivata.png)
+
+Di seguito un esempio di ridefinizione dell'assegnazione in modo tale che abbia il comportamento dell'assegnazione standard per il sottooggetto
+
+![Assegnazione ridefinita standard](../../assets/Assegnazione_standard.png)
+
+
+### Distruzione
+
+Il distruttore: agisce in modo inverso alla costruzione
+Prima esegue il codice del distruttore (se esiste):
+
+1. distrugge i campi dati propri in ordine inverso a quello di dichiarazione
+
+2. poi distrugge il sottooggetto
+
+![Distruttore](../../assets/Distruttore.png)
+
+![Distruttore](../../assets/Distruttore_ridefinito.png)
+
