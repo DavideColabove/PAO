@@ -133,3 +133,16 @@ int main(){
     print(d);   // stampa: 3.14
 }
 ```
+
+## Ridefinizione di metodi
+
+Potrebbe avere senso ridefinire nella classe derivata alcune funzionalitá ereditate dalla classe base
+
+I metodi sono concepiti come dei contratti, quindi l'implementazione di un contratto della base 
+potrebbe richiedere adattamenti o variazioni nella classe derivata
+
+Ci sono 2 modalitá di ridefinire un metodo:
+
+1. Stessa segnatura
+
+2. Stesso nome di metodo ma segnatura diversa
