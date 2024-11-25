@@ -22,5 +22,6 @@ class poligono{
         poligono& operator=(const poligono&);   
         // contratto: ritorno il perimetro del poligono di invocazione
         virtual double perimetro() const;   // metodo virtuale
+        virtual double area() const =0;     // metodo virtuale puro
 };
 #endif
