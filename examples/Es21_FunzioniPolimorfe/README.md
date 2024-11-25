@@ -88,6 +88,8 @@ Nell'esempio:
 
 L'overriding é permesso da tutti i linguaggi OOP, in cui la versione del metodo che sará eseguita sará determinata dall'oggetto che é usata per invocarla (oggetto a cui si riferisce il mio puntatore/riferimento polimorfo = tipo dinamico della varibile polimorfa)
 
+Nelle funzioni virtuali con valori di default non dobbiamo ripetere i valori di default (proprio come quando definiamo la funzione fuori dalla classe e ne riportiamo la segnatura)
+
 ### Overriding di metodi virtuali
 
 1. Identica segnatura, tipo di ritorno e const incluso
