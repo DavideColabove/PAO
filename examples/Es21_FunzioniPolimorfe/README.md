@@ -58,7 +58,7 @@ Il legame tra variabile di invocazione (necessariamente polimorfa) e funzione ch
 ![Static vs Dynamic Binding](../../assets/StaticVSDynamicBinding.png)
 
 
-1. Late binding: il binding viene fatto a runtime
+1. Late binding: il binding viene fatto a runtime, puó essere bloccato specificano la funzione desiderata con l'operatore di scoping::
 
 2. Dynamic bynding
 
@@ -109,3 +109,4 @@ Permette di segnalare alla classe che fa un overriding che ritorna qualcosa che 
 Se si ritorna un puntatore o un riferimento in una funzione virtuale e l'overriding ritorna qualcosa di piú specializzato é regola arrichire il tipo di ritorno
 
 ![Covarianza](../../assets/Covarianza.png)
+
