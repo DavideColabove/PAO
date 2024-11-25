@@ -68,3 +68,15 @@ int main(){
     // chiama la funzione all'indirizzo *((p->vptr)+2) cioé chiama D::m2()
 }
 ```
+## Distruttori Virtuali: Distruzione in funzioni polimorfe
+
+Se non faccio nulla, la chiamata del distruttore é statica (come é stato dichiarato) quindi in questo caso é la chiamata del distruttore di B cioé viene distrutto il sottooggeto
+
+C'é la possibilitá di marcare i distruttore virtuali  
+
+![Delete Functions Polimorfe](../../assets/Delete_FunPolimorfe.png)
+
+Puó andare spesso bene il distruttore standard  
+Nell'esempio a seguito troviamo l'utilizzo del distruttore virtuale in una gerarchia
+
+![Distruttore Virtuale](../../assets/Distruttore_Virtuale.png)
