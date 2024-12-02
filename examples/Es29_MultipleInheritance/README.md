@@ -133,3 +133,37 @@ Le funzioni virtuali ereditate dalle basi (in caso di ereditarietá multipla) ch
 In caso contrario ho una illegalitá del compilatore, fondamentalmente essendo una classe polimorfa il compilatore ha bisogno di sapere dove far puntare l'indirizzo della funzione virtuale (se ne ha 2 non sa quale scegliere)
 
 ![Final overrider](../../assets/Final_overrider.png)
+
+
+## Costruttori di D in presenza di basi virtuali
+
+1. Per primi vengono richiamati, una sola volta, i costrutotri delle classi base virtuali che si trovano nella gerarchia di derivazione di D. VI puó essere piú di una classe base virtuale nella gerarchia di derivazione di D: la ricerca delle classi base virtuali nella gerarchi procedendo seguendo l'ordine da sinistra verso destra e dall'alto verso il basso ("left-to-right top-down order");
+
+2. Una volta che sono stati invocati i costruttori delle classi virtuali nella gerarchia di derivazione D, vengono richiamati i costruttori delle superclassi dirette non virtuali di D: questi costruttori escludono di richiamare eventuali costruttori di classi virtuali giá richiamati al passo (1.); 
+
+3. Infine viene eseguito il costruttore proprio di D, ovvvero vengono costruiti i campi dati propri di D e quindi viene eseguito il corpo del costruttore di D
+
+Le chiamate dei costruttori dei punti (1.) e (2.), se non sono esplicite, vengono automaticamente inserite dal compilatore nella lista di inizializzazione del costruttore di D: in questo caso, come al solito, si tratta di chiamate implicite ai costruttori di default.
+
+![Costruttori classi base virtuali](../../assets/Costruttori_MultipleInheritance.png)
+
+Per prima cosa vengono istanziate le classi di basi virtuali, A e D: left-to-right quindi prima A e poi D  
+Per costruire D dobbiamo prima costruire il sottooggeto B di D quindi dobbiamo prima prima costruire B  
+A questo punto ho costruito: A B D  
+Rimane, per costruire l'E di guardare quali sono i suoi genitori diretti (C e D)  
+Costruisco il C, che vorrebbe costruire un A ma siccome é giá stato costruito non viene stampato A C ma solo C: se A non fosse virtuale avrebbe costruito anche A  
+Poi dovrei costruire D ma é giá stato costruito, quindi non viene costruito  
+Infine viene costruito E, ottenendo infine in stampa:  
+A B D C E
+
+![Costruttori classi base virtuali](../../assets/Ex_costruttori_multiple_inheritance.png)
+
+![Costruttori classi base virtuali](../../assets/Ex_costruttori_multiple_inheritance1.png)
+
+
+## Esercizio cilicono
+
+Implementazione gerarchia seguente:
+
+![Es Cilicono](../../assets/cilicono.png)
+
