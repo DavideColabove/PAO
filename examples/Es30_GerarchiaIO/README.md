@@ -209,3 +209,43 @@ CHIUSURA DI UN FILE: Il metodo close() chiude esokuctamente un file: viene autom
 
 
 ## Stream di stringhe
+
+Si possono definire stream associati a stringhe, ossia sequenze di caratteri memorizzate in RAM (si parla anchedi I/O in memoria). Il carattere nullo di terminazione gioca il ruolo di marcatore di fine stream
+
+![string stream](../../assets/string_stream.png)
+
+Le classi da utilizzare sono: istringstream, ostringstream e stringstream, il file header che le dichiara é <sstream>.  
+I costruttori sono i seguenti: 
+
+![string stream costruttori](../../assets/costruttori_string_stream.png)
+
+I metodi di scrittura/lettura sono quelli ereditati da istream, ostream e iostream. Il metodo str() applicato ad uno stream di stringhe ritorna la stringa associata allo stream.
+
+Segue un esempio:
+
+```cpp
+#include<iostream>
+#include<sstream>
+
+int main(){
+    stringstream ss;    // stringa associata anonima 
+    ss << 236 << ' ' << 3.14 << "   pippo   ";  // output su stringsream
+    cout << ss.tellp() << ' ' << ss.tellg() << endl;
+    // posizioni di testina di output e input : 17 0
+    // la stringa in memoria é: "236 3.14   pippo   "
+    // la testina di output é avanzata alla fine ios::end
+    // la testina di input é ancora a ios::beg
+    int i;  
+    ss >> i;    // input da stringstream
+    cout << i << endl;  // stampa: 236
+    double d;
+    ss >> d;
+    cout << d << endl;  // stampa: 3.14
+    string s;
+    ss >> s;
+    cout << "*" << s << "*\n"; // stampa: *pippo*
+}
+```
+Un altro esempio per far dialogare le stringhe ottenute dalla GUI con l'overloading dell'operatore di input che implementa l'algoritmo di parsing:
+
+![string stream costruttori](../../assets/string_GUI.png)
