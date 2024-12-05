@@ -157,3 +157,43 @@ Le regole che definiscono la compatibilitá tra il tipo T del parametro di una c
     1. E é un sottotipo derivato pubblicamente da T;  
     2. T é un tipo puntatore B* ed E é un tipo puntatore D* dove D é un sottotipo di B;  
     3. T é un riferimento B& ed E é un tipo riferimento D& dove D é un sottotipo di B;  
+
+3. T é il tipo void* ed E é un qualsiasi tipo puntatore
+
+4. NON POSSONO ESSERE APPLICATE CONVERSIONI IMPLICITE
+
+Per subtyping dobbiamo invocare prima le eccezioni piú definite (derivate nella gerarchia) e poi quelle meno definite, altrimenti nell'esempio, E "prende" anche le eccezioni di E1 e quindi alcuni gestori sarebbero codice morto
+
+![Exception classes](../../assets/gerarchia_eccezioni.png)
+
+
+## Comportamenti tipici di una clausola catch
+
+I comportamenti tipici di una clausola catch sono i seguenti:
+ 
+1. Rilanciare un'eccezione
+
+2. Convertire un tipo di eccezione in un altro, rimediando parzialmente e lanciando un'eccezione diversa
+
+3. Cercare di ripristinare il funzionamento, in modo che il programmapossa continuare dall'istruzione che segue l'ultima catch
+
+4. Analizzare la situazione che ha causato l'errore, eliminarne eventualmente la causa e riprovare a chiamare la funzione che ha causato originariamente l'eccezione
+
+5. Esaminare l'errore ed invocare std::terminate()
+
+
+## La gerarchia exception
+
+Il C++ standard prevede una gerarchia di classi di eccezioni predefinita
+
+![Exception classes](../../assets/gerarchia_eccezioni1.png)
+
+exception é la classe base, da cui derivano runtime_error e logic_error, da cui derivano parecchie classi
+
+Derivano da exception anche le seguenti classi di eccezioni:
+
+1. bad_cast, le cui eccezioni sono lanciate dal dynamic_cast per riferimenti
+
+2. bad_alloc, lanciata dalla new quando lo heap é esaurito (il gestore di default invoca la terminate())
+
+3. bad_typeid, viene lanciata dall'operatore typeid quando ha come argomento un puntatore nullo
