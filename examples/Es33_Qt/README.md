@@ -65,14 +65,87 @@ Per quanto riguarda i tipi, viene fornito chi é il supertipo diretto e chi sono
 ![Documentazione](../../assets/Documentazione.png)
 
 
+## Compilazione da shell
 
-```cpp
-telefonata bolletta::Estrai_Una(){
-    if(Vuota()) throw Ecc_Vuota();
-    telefonata aux = first->info;
-    first = first->next;
-    return aux;
-}
+Si usa qmake -project per generare il file .pro
 
-class Ecc_Vuota{ };
-```
+![Compilazione](../../assets/Compilazione_Qt.png)
+
+
+## Segnali e slot
+
+Ogni oggetto puó emettere dei segnali, i segnali servono per raccordarli con delle funzioni che reagiscono all'emissione di questo segnale e queste funzioni si chiamano slot (sono disponibili per alcuni tipi)
+
+Un segnale puó essere connesso tramite connect() a piú slot dello stesso oggetto ma anche a slot di oggetti diversi 
+
+![Segnali e slot](../../assets/Compilazione_Qt.png)
+
+![Segnali e slot](../../assets/Signals&slots.png)
+
+Ad esempio segnali che possono essere emessi da un PushButton, il segnale emesso si chiama clicked() che é conneso allo slot (funzione) addContact() dell'oggetto AddressBook (nel primo esempio)
+
+![Connect](../../assets/connect.png)
+
+Sono possibili diverse combinazioni:
+1. Segnale 1 connesso a slot 1  
+2. Segnale 1 connesso a slot 1 e slot 2   
+3. Segnale 1 e Segnale 2 connessi a slot 1  
+4. Segnale 1 connesso a Segnale 2: segnale rimbalzato, un widget emette un segnale e invece che andare direttamente ad essere connesso ad uno slot che reagisce a quel segnale provoca l'emissione di un altro segnale (come un domino, ad un certo punto ci dovrá essere una connessione ad un slot);  
+
+Quando viene emesso un segnale vengono invocati tutti gli slot connessi a quel segnale, le connessioni vengono eseguite seguendo un ordine (conta quindi anche l'ordine)
+
+![Connect implementation](../../assets/connect.png)
+
+### Implementazione connect()
+
+In Qt tutto é mediato tramite puntatori
+
+Una funzione connect() definita dentro QObject (livello massimo) ed é statica, non ha quindi un oggetto di invocazione.  
+La segnatura chiede l'Object che emette il segnale (const QObject* sender) é un puntatore ad oggetti costante, il segnale emesso é una stringa (const char* signal), il receiver é anche lui un puntatore ad oggetti costante (const QObject* receiver) e lo slot che deve essere connesso al sender é un'altra stringa (const char* method)
+
+![Connect implementation](../../assets/Connect1.png)
+
+Le due macro per ottenere le stringhe associate a segnali e slot sono SIGNAL() e SLOT(): hanno come argomento il nome del segnale con l'eventuale tipo (vuole solo la segnatura, non il parametro formale (nome variabile))
+
+![Connect implementation](../../assets/Connect2.png)
+
+![Connect implementation](../../assets/Connect3.png)
+ 
+MyWidget é un sottotipo di QWidget;  
+Voglio definire i miei segnali: dico che questo mio widget puó emettere un segnale che é buttonClicked() e va definito dentro la sezione signals: dove va definita la lista di segnali.  
+Nel costruttore costruisco un QPushButton() con parametro this che dice sto costruendo un figlio QPushButton che ha come padre me stesso.  
+Va poi connesso il segnale clicked() con il segnale buttonClicked()
+
+## Slots
+
+Gli slots sono metodi "ordinari", preceduti dalla Qt keyword slots  
+slot:   
+    lista dei metodi di slot (che possoo essere connessi a dei segnali definti da utente)
+
+Una classe contenente propri slots deve includere nella parte privata la macro QObject::Q_OBJECT. Che serve al MOC
+
+In ogni file .cpp/.h che contiene la macro Q_OBJECT, tutti gli slots saranno espansi dal MOC in un file .moc
+
+Tutto ció é gestito automaticamente da qmake
+
+
+## Signals
+
+Un segnale é una dichiarazione di una funzione "senza corpo", a cui possono essere aggiunti dei parametri. Non ha tipo di ritorno (sempre void), nome del segnale ed eventuali parametri
+
+Aggiungere sempre alla parte privata di una classe con segnali  propri la macro QObject::Q_OBJECT. Serve al MOC
+
+Un segnale si dichiara (non si definisce) come un metodo ordinario preceduto dalla Qt keyword signals  
+signals:  
+    void valueChanged(int newValue);  
+
+Il segnale non va implementato
+
+Per emettere il segnale si usa la Qt keyword emit:  
+emit valueChanged(12)
+
+
+## Costruzione e Distruzione
+
+Sfrutta la relazione di parentela, in entrambe i sensi:
+Se rimuovo un widget, lui automaticamente viene tolto da quella gerarchia di parentela; ma se io vado a rimuovere suo padre, vengono rimossi anche suo figlio, suo nipote,...
