@@ -149,3 +149,17 @@ emit valueChanged(12)
 
 Sfrutta la relazione di parentela, in entrambe i sensi:
 Se rimuovo un widget, lui automaticamente viene tolto da quella gerarchia di parentela; ma se io vado a rimuovere suo padre, vengono rimossi anche suo figlio, suo nipote,...
+
+
+## Abstract Factory Design Pattern 
+
+L'abstract Factory fornisce un'interfaccia per creare famiglie di oggetti connessi o dipendenti fra loro, in modo che non ci sia necessita da parte dei client di specificarei nomi delle classi concrete all'interno del proprio codice.
+
+In questo modo si permette che un sistema sia indipendente dall'implementazione degli oggetti concreti e che il client, attraverso l'interfaccia, utilizzi diverse famiglie di prodotti.
+
+![Abstract Factory Design Pattern](../../assets/AbstractFactoryDesignPattern.png)
+
+![Abstract Factory Design Pattern](../../assets/VirtualePuroLinuxMac.png)
+
+![Abstract Factory Design Pattern](../../assets/Factory.png)
+
