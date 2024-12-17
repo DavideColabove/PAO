@@ -264,4 +264,43 @@ Anche note come funtori anonimi o chiusure
 [capture list] elenca la lista delle variabili della closure, cioé variabili all'esterno della Lambda
 espressione usate come l-valore (lettura e scrittura) o r-valore (sola lettura) dalla lambda espressione.
 
-![Closures](../../assets/Functors.png)
+![Closures](../../assets/Closures.png)
+
+
+### Puntatori Smart (std::shared_ptr)
+
+![Shared_ptr](../../assets/Shared_ptr.png)
+
+L'idea di base é avere dei puntatori smart che riescono a contare il numero di puntatori ordinari
+che si riferiscono a qualche oggetto  
+"Riescono a contare" significa che implementano la tecnica del reference counting, l'invariante che mantengono
+questi oggetti puntatori condivisi é che in ogni istante hanno un campo dati intero >0 che conta il numero
+di puntatori condivisi che si riferiscono allo stesso oggetto (primitivo o definito da utente)
+shared pointer é quindi un template  
+Quando il contatore dei riferimenti diventa 0, l'oggetto puó essere distrutto automaticamente dal puntatore condiviso.
+
+Per utilizzare questi shared_ptr bisogna includere <memory>
+
+![Shared_ptr](../../assets/Shared_ptr1.png)
+
+Per inizalizzarlo bisogna utilizzare la funzione make_shared in std istanziata al <tipo del puntatore>
+e gioca il ruolo del costruttore 
+
+![Shared_ptr](../../assets/Shared_ptr2.png)
+
+Ho costruito un puntatore smart a C che punta ad un nuovo oggetto C (allocati sullo heap) con il costruttore
+C(5)
+
+Il count puó essere controllato con la funzione use_count() che mi da esattamente il valore reference counting
+per quel puntatore smart
+
+La funzione di reset() significa che toglie il puntatore smart che si riferisce a quell'oggetto, quindi non punta 
+piú da nessuna parte 
+La funzione reset() con parametri si puó spostare da un altra parte es: p1.reset(new C(7))
+
+Se assegno allo shared pointer nullptr invoco il distruttore 
+
+![Shared_ptr](../../assets/Shared_ptr3.png)
+
+Riassumento posso utilizzare i puntatori smart come fossero puntatori ordinari con la differenza che quando si
+crea garbage viene automaticamente deallocato
