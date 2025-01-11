@@ -8,7 +8,7 @@ class It {
         It operator++(int) { It t = *this; index++; return t; }
         It operator+(int k) {index = index + k; return *this; }
     private:
-    int index;
+        int index;
 };
 
 class C {
@@ -27,9 +27,11 @@ class C {
 
 main() {
     C c1(4), c2(8);
-    for(It i = c1.begin(); i < c1.end(); i++) cout << c1[i] << ’ ’;
-    cout << "UNO\n";
+    for(It i = c1.begin(); i < c1.end(); i++) 
+        cout << c1[i] << ' ';
+                                cout << "UNO\n";
     It i = c2.begin();
-    for(int n=0; i < c2.end(); ++n, i = i+n) cout << c2[i] << ’ ’;
-    cout << "DUE\n";
+    for(int n=0; i < c2.end(); ++n, i = i+n) 
+        cout << c2[i] << ' ';
+                                cout << "DUE\n";
 }
