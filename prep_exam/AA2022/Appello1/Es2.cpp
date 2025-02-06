@@ -80,3 +80,18 @@ int main()
 
     return 0;
 }
+
+/*
+A() B() C() E() D() F()
+A() B() C() Ec
+B::f(int) F::f(double)
+NON COMPILA
+D::f(Z) D::f(double)
+NESSUNA STAMPA
+E::f() C::f(Z)
+E::f(Z) E::f() C::f(Z)
+F::f(Z) C::f(const int&)
+F::f(Z) B::f(int) F::f(double)
+~B ~A
+~E ~C ~B ~A
+*/
