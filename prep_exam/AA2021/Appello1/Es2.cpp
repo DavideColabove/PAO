@@ -13,9 +13,7 @@ class SIM{
         static double costo_d;
     public:
         SIM(unsigned int s =0, unsigned int m =0): sec(s), MB(m){}
-        virtual double costoMeseCorrente() const = 0 {
-            return sec*costo_c + MB*costo_d;
-        }
+        virtual double costoMeseCorrente() const = 0;
         unsigned int getSec() const{
             return sec;
         }
@@ -58,8 +56,8 @@ class PAO{
     public:
         vector<Dati> fun1(double x){
             vector<Dati> res;
-            for(auto cit = sim.begin(); cit != sim.end(); ++cit){
-                const Dati* d = dynamic_cast<const Dati*>(cit);
+            for(list<const SIM*>::const_iterator cit = sim.begin(); cit != sim.end(); ++cit){
+                const Dati* d = dynamic_cast<const Dati*>(*cit);
                 if(d && d->getMB() >= x)
                     res.push_back(*d);
             }
@@ -67,11 +65,11 @@ class PAO{
         }
         list<Tel*> fun2(){
             list<Tel*> res;
-            for(auto cit = sim.begin(); cit != sim.end(); ++cit){
-                const Tel* t  = dynamic_cast<const Tel*>(cit);
-                if(t && t->costoMeseCorrente() > 2*Tel::getBase())
+            for(list<const SIM*>::const_iterator cit = sim.begin(); cit != sim.end(); ++cit){
+                const Tel* t  = dynamic_cast<const Tel*>(*cit);
+                if(t && t->costoMeseCorrente() > 2*t->getBase())
                     res.push_back(const_cast<Tel*>(t));
             }
             return res;
         }
-}
+};
