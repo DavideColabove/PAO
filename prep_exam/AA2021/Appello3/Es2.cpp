@@ -28,8 +28,8 @@ class Abbonato{
         }
 };
 
-const double Abbonato::costo_base = 15;
-const double Abbonato::costo_extra = 5;
+const double Abbonato::costo_base = 15.0;
+const double Abbonato::costo_extra = 5.0;
 
 class AbbonatoTraffico: public Abbonato{
     private:
