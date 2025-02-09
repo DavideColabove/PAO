@@ -24,7 +24,7 @@ class E: virtual public B{
         Z ez;
         E& operator=(const E& e){
             B::operator=(e);
-            ez = ez.e;
+            ez = e.ez;
             return *this;
         }
 };
