@@ -18,7 +18,14 @@ public:
     A* n() {cout <<" B::n "; return this;}
 };
 
-class E: public B {
+class C: public A {
+    public:
+        virtual void f() {cout <<" D::f ";}
+        void h() const {cout <<" D::h "; h();}
+        void m() {cout <<" D::m "; h(); f();}
+};
+
+class D: public B {
 public:
     B* n() {cout <<" E::n "; return this;}
 protected:
@@ -27,30 +34,29 @@ public:
     void m() {cout <<" E::m "; f(); r();}
 };
 
-class D: public A {
-public:
-    virtual void f() {cout <<" D::f ";}
-    void h() const {cout <<" D::h "; h();}
-    void m() {cout <<" D::m "; h(); f();}
-};
 
 int main() {
-    A* q1 = new E(); 
+    A* q1 = new D(); 
     A* q2 = new B(); 
-    A* q3 = new D(); 
-    B* q4 = new E(); 
-    const A* q5 = new D();
+    A* q3 = new C(); 
+    B* q4 = new D(); 
+    const A* q5 = new C();
 
-    //q1->h();    cout<<"\n";
-    //q2->k();    cout<<"\n";
+    //q1->f();    cout<<"\n";
+    //q1->g();    cout<<"\n";
+    //q2->h();    cout<<"\n";
+    //q2->m();    cout<<"\n";
+    //q3->g();    cout<<"\n";
     //q3->h();    cout<<"\n";
-    //q4->m();    cout<<"\n";
-    //q4->h();    cout<<"\n";
+    q4->m();    cout<<"\n";
+    //q4->g();    cout<<"\n";
+    //(q3->n())->m();    cout<<"\n";
     //(q3->n())->n()->f();    cout<<"\n";
     //(q4->n())->m();    cout<<"\n";
     //(q5->n())->f();    cout<<"\n";
     //(dynamic_cast<B*>(q1))->m();    cout<<"\n";
-    //(static_cast<D*>(q2))->h();    cout<<"\n";
+    //(static_cast<C*>(q2))->g();    cout<<"\n";
+    //(static_cast<B*>(q3->n()))->f();    cout<<"\n";
 
     return 0;
 }
