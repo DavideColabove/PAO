@@ -8,14 +8,14 @@ class B {
     private:
         vector<bool>* ptr;
         virtual void m() const=0;
-    };
+};
     
-    class D: public B { 
-        private: 
-            int x;
-    };
+class D: public B { 
+    private: 
+        int x;
+};
     
-    class F: public D { 
+class F: public D { 
     private: 
         list<int*> l; 
         int& ref; 
