@@ -9,7 +9,7 @@ class A{
 
 class B: public A{
     public:
-        virtual void f = 0;
+        virtual void f() = 0;
 };
 
 class C: public B{
