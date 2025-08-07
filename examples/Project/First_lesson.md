@@ -3,6 +3,17 @@
 Discussione riguardo il framework Qt nell'ambito del progetto didattico.
 
 
+## RECAP
+
+Recap di quanto visto in questa lezione:
+
+1.  Quando viene creato un widget in Qt si sta estendendo la classe QWidget, cioe' ereditando da essa;
+2.  Va sempre inserita la macro Q_OBJECT dentro un widget per permettere al precompliatore di sapere come comportarsi
+3.  QVBoxLayout organizza i widgets verticalmente e QHBoxLayout li organizza orizzontalmente
+4.  E' importante prestare attenzione all'alignment
+5.  Le string in Std non sono compatibili con le QString quindi sarà necessario usare il metodo QString::fromStdString() per effettuarne la conversione
+
+
 ## Qt
 
 Qt è un framework cross-platform per la creazione di GUI e di applicazioni cross-platform;
@@ -59,12 +70,14 @@ IMPORTANTE: provare con questi comandi in Linux dato che saranno usati per la va
 
 Se viene modificato un file esistente bisogna rilanciare il comando "make", mentre se viene aggiunto o rimosso un file bisognerà rilanciare anche il comando "qmake" e poi "make"
 
+
 ## Esempio di strutture layout per un applicazione GUI
 
 ![GameLayout](../../assets/QtLayout.png)
 
 Identificare i blocchi che compongono la GUI sarà utile per l'implementazione in Qt.
 Ogni framework GUI funziona tramite blocchi rettangolari, container e stretch (o spacers), che servono ad organizzare la struttura della GUI;
+
 
 ## Esempio di core model logico dell'applicazione
 
@@ -82,6 +95,7 @@ L'immagine rappresenta una diagramma UML, di seguito un cheatsheet:
 5. Frecce per l'ereditarietà
 6. Italico per i metodi virtuali, grassetto per i virtuali puri
 
+
 ## Separazione tra modello logico e GUI
 
 ![GUIwidgets](../../assets/GUIwidgets.png)
@@ -94,17 +108,47 @@ Lo schema sopra riportato vengono rappresentate anche le implementazioni dei blo
 Tutto cio che facciamo deve stare dentro il main window, che contine i widget della nostra applicazione.
 
 
-## Segnali e slot
+## Esempio di implementazione InfoPanel
+
+![InfoPanelQT](../../assets/InfoPanelQT.png)
+
+Q_OBJECT è una macro (direttiva al precompilatore), stiamo dicendo al precompilatore di controllare cosa Qt intenda con questo Q_OBJECT;
+
+ATTENZIONE: ogni volta che creiamo un widget dobbiamo usare questa macro
+
+Al costruttore passiamo anche QWidget* parent, cioé il genitore dei suoi rettangoli figli (per sapere dove attaccare il widget), ha un valore di default = 0
 
 
-## Slots
+## Struttura di un widget
+
+![WidgetStructure](../../assets/WidgetConstructor.png)
+
+Nel costruttore di un widget definiremo la struttura del widget stesso: ad esempio, la disposizione delle 3 label dell'esempio precedente (in alto a sinistra, una sotto l'altra) verrà definita nel costruttore del widget Info
+
+Per questo, Qt ci mette a disposizione una classe QVBoxLayout (che non è un widget ma bensi un layout perche non si vede direttamente ma ne definisce le posizioni, ecc..) 
+QHBoxLayout ad esempio gli elementi si disporrebbero in orizzontale (h = horiziontal, v = vertical)
+
+Si istanzia una variabile come puntatore a cui passiamo this come argomento,  perche specifica che tale widget userà questo layout;
+
+layout->setAlignment(...) permette di definire come devono essere disposte le label e gli altri elemtni al suo interno.
+
+Invoco poi il metodo addWidget sul layout appena creato per aggiungere l'etichetta vuota al layout e gli passo la QLabel 
+La logica è che verranno mostrati in ordine di aggiunta (come se fossero appended uno dopo l'altro)
 
 
-## Signals
+## Il metodo show()
 
-## Costruzione e Distruzione
+![ShowMethod](../../assets/ShowMethod.png)
+
+Viene invocato ogni volta che ho bisogno di aggiornare cosa viene mostrato nelle etichette;
+
+Accedo a tutte 3 le etichette e tramite il loro metodo setText() ne aggiorno il testo.
+
+ATTENZIONE: QString e std::String non sono pienamente compatibili, avendo quindi definito i nomi dei personaggi come std::String dovro' invocare il metodo statico fromStdString() contenuto in QString e passargli come parametro la stringa da convertire;
+
+Allo stesso modo anche per convertire un int in QString dovro' usare il metodo statico number().
 
 
-## Abstract Factory Design Pattern 
+
 
 
