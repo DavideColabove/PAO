@@ -8,9 +8,9 @@ Discussione riguardo il framework Qt nell'ambito del progetto didattico.
 
 
 
-## Qt
+## Esempio pannello eroe
 
-
+![HeroPanel](../../assets/QtHELLOWORLD.png)
 
 ### Come eseguire una applicazione 
 
