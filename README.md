@@ -9,7 +9,7 @@ Tutto il materiale è relativo al corso di Programmazione Ad Oggetti del profess
 ## 📜 Indice
 
 - [Descrizione](#-descrizione)
-- [Struttura del Progetto](#-struttura-del-progetto)
+- [Struttura del Repository](#-struttura-del-progetto)
 - [Tecnologie Usate](#-tecnologie-usate)
 - [Come Iniziare](#-come-iniziare)
 - [Contributi](#-contributi)
@@ -34,10 +34,6 @@ Questo repository raccoglie esercizi e progetti sviluppati durante il mio percor
 PAO/
 │   README.md                               # Documentazione principale
 │
-├───.vscode/                                # Configurazioni per Visual Studio Code
-│       settings.json
-│       tasks.json
-│
 ├───assets/                                 # Immagini e risorse grafiche di supporto
 │       ABC.png
 │       AbstractFactoryDesignPattern.png
@@ -48,7 +44,7 @@ PAO/
 │   │   └───Appello1/
 │   │       Es1.cpp
 │   │       Es2.cpp
-│           ...
+│       ...
 │   ├───AA2025/
 │   │   └───Appello1/
 │   │       Es1.cpp
@@ -60,7 +56,7 @@ PAO/
 │           Raz.cpp
 │           Raz.h
 │
-├───Lectures/                               # Materiale e esercizi organizzati per lezione
+├───Lectures/                               # Materiale e esercizi organizzati per argomenti
 │   ├───Es1_Orario/
 │   │   orario.cpp
 │   │   orario.h
@@ -81,10 +77,10 @@ PAO/
 │   │       mywidget.cpp
 │   └───... (altri esercizi numerati)
 │
-├───Project/                                # Appunti e documentazione progetti
+├───Project/                                # Appunti e documentazione Qt per il progetto didattico
 │       First_lecture.md
 │       Second_lecture.md
-│       Third_lecture.md
+│       ...
 │
 └───Tutorato/                               # Esercizi svolti durante il tutorato
     ├───Es_2_7_4/
@@ -92,13 +88,16 @@ PAO/
     └───Es_Persona/
             persona.cpp
             persona.h
-
 ```
+
+Le risorse didattiche (riassunti) sono organizzate in concomitanza con le lezioni del Professore Francesco Ranzato nell'Anno Accademico 2020/21.
+
 ---
 
 ## 🛠️ Tecnologie Usate
 
 - **C++**: Linguaggio principale per lo sviluppo OOP.
+- **Qt**: Framework per l'implementazione della parte grafica.
 - **Git**: Controllo di versione.
 
 ---
