@@ -45,7 +45,7 @@ Per eseguire una applicazione in scritta in Qt:
 
 ## Primo codice in Qt
 
-![HelloWorldQT](../../assets/QtHELLOWORLD.png)
+![HelloWorldQT](../assets/QtHELLOWORLD.png)
 
 Bisogna includere gli header file QApplication (contiene le definizioni per avviare una applicazione) e QLabel (un elemento con contenuto visualizzabile)
 
@@ -73,7 +73,7 @@ Se viene modificato un file esistente bisogna rilanciare il comando "make", ment
 
 ## Esempio di strutture layout per un applicazione GUI
 
-![GameLayout](../../assets/QtLayout.png)
+![GameLayout](../assets/QtLayout.png)
 
 Identificare i blocchi che compongono la GUI sarà utile per l'implementazione in Qt.
 Ogni framework GUI funziona tramite blocchi rettangolari, container e stretch (o spacers), che servono ad organizzare la struttura della GUI;
@@ -81,7 +81,7 @@ Ogni framework GUI funziona tramite blocchi rettangolari, container e stretch (o
 
 ## Esempio di core model logico dell'applicazione
 
-![GameCore](../../assets/CoreModel.png)
+![GameCore](../assets/CoreModel.png)
 
 In questo esempio di core model, completamente scorrelato dalla GUI, vediamo la creazuione di uno schema logico per il funzionamento e disposizione delle classi: in questo caso, la classe base astratta Character viene specializzata in Hero (il giocatore) e Monster (il nemico) che estendono le funzionalità della classe Character aggiungendo i loro metodi specifici, aggiungendone attributi e overrideando metodi già definiti nella classe base astratta.
 
@@ -98,7 +98,7 @@ L'immagine rappresenta una diagramma UML, di seguito un cheatsheet:
 
 ## Separazione tra modello logico e GUI
 
-![GUIwidgets](../../assets/GUIwidgets.png)
+![GUIwidgets](../assets/GUIwidgets.png)
 
 Sarebbe teoricamente possibile implementare direttamente l'interfaccia grafica durante lo sviluppo del modello logico ma cio' risulterebbe inefficiente;
 Al contrario, se si tengono separati i due componenti è possibile testare man mano da CLI le funzioni appena implementate senza dover completare lo sviluppo della GUI.
@@ -110,7 +110,7 @@ Tutto cio che facciamo deve stare dentro il main window, che contine i widget de
 
 ## Esempio di implementazione InfoPanel
 
-![InfoPanelQT](../../assets/InfoPanelQT.png)
+![InfoPanelQT](../assets/InfoPanelQT.png)
 
 Q_OBJECT è una macro (direttiva al precompilatore), stiamo dicendo al precompilatore di controllare cosa Qt intenda con questo Q_OBJECT;
 
@@ -121,7 +121,7 @@ Al costruttore passiamo anche QWidget* parent, cioé il genitore dei suoi rettan
 
 ## Struttura di un widget
 
-![WidgetStructure](../../assets/WidgetConstructor.png)
+![WidgetStructure](../assets/WidgetConstructor.png)
 
 Nel costruttore di un widget definiremo la struttura del widget stesso: ad esempio, la disposizione delle 3 label dell'esempio precedente (in alto a sinistra, una sotto l'altra) verrà definita nel costruttore del widget Info
 
@@ -138,7 +138,7 @@ La logica è che verranno mostrati in ordine di aggiunta (come se fossero append
 
 ## Il metodo show()
 
-![ShowMethod](../../assets/ShowMethod.png)
+![ShowMethod](../assets/ShowMethod.png)
 
 Viene invocato ogni volta che ho bisogno di aggiornare cosa viene mostrato nelle etichette;
 
