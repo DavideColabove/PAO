@@ -48,7 +48,7 @@ PAO/
 │   │   └───Appello1/
 │   │       Es1.cpp
 │   │       Es2.cpp
-│       ...
+│           ...
 │   ├───AA2025/
 │   │   └───Appello1/
 │   │       Es1.cpp
@@ -93,7 +93,7 @@ PAO/
             persona.cpp
             persona.h
 
-
+```
 ---
 
 ## 🛠️ Tecnologie Usate
