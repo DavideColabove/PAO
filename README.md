@@ -28,15 +28,71 @@ Questo repository raccoglie esercizi e progetti sviluppati durante il mio percor
 
 ---
 
-## 📂 Struttura del Progetto
+## 📂 Struttura del Repository
 
-Ecco una panoramica delle principali cartelle e file:
+```text
+PAO/
+│   README.md                               # Documentazione principale
+│
+├───.vscode/                                # Configurazioni per Visual Studio Code
+│       settings.json
+│       tasks.json
+│
+├───assets/                                 # Immagini e risorse grafiche di supporto
+│       ABC.png
+│       AbstractFactoryDesignPattern.png
+│       ... (altri file immagine)
+│
+├───Exams/                                  # Raccolta di esercizi d’esame per anno e appello
+│   ├───AA2016/
+│   │   └───Appello1/
+│   │       Es1.cpp
+│   │       Es2.cpp
+│       ...
+│   ├───AA2025/
+│   │   └───Appello1/
+│   │       Es1.cpp
+│   │       Es2.cpp
+│   └───Esercizi_Vari/
+│       ContoBancario.cpp
+│       ... (altri esercizi)
+│       └───Raz/
+│           Raz.cpp
+│           Raz.h
+│
+├───Lectures/                               # Materiale e esercizi organizzati per lezione
+│   ├───Es1_Orario/
+│   │   orario.cpp
+│   │   orario.h
+│       ...
+│   ├───Es19_FigureGeometriche/
+│   │   pol.cpp
+│   │   qua.cpp
+│       ...
+│   ├───Es22_Implementazione_VirtualFunction/
+│   │   Shape.cpp
+│   │   └───Update_Es19_FigureGeometriche/
+│   │       ... (file figura geometriche aggiornati)
+│   ├───Es33_Qt/
+│   │   Layout.cpp
+│   │   ...
+│   │   └───LCDRange/
+│   │       lcdrange.cpp
+│   │       mywidget.cpp
+│   └───... (altri esercizi numerati)
+│
+├───Project/                                # Appunti e documentazione progetti
+│       First_lecture.md
+│       Second_lecture.md
+│       Third_lecture.md
+│
+└───Tutorato/                               # Esercizi svolti durante il tutorato
+    ├───Es_2_7_4/
+    │       Es.cpp
+    └───Es_Persona/
+            persona.cpp
+            persona.h
 
-- **`src/`**: Codice sorgente dei vari progetti.
-- **`docs/`**: Documentazione per ogni progetto, inclusi UML e descrizioni dettagliate.
-- **`tests/`**: Test unitari per validare il codice.
-- **`examples/`**: Esempi di utilizzo delle classi e delle funzioni principali.
-- **`tutorato/`**: Esercizi disponibili nel tutorato del corso PAO.
 
 ---
 
