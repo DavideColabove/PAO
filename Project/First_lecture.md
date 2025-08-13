@@ -1,9 +1,9 @@
-# Descrizione
+# **Descrizione**
 
 Discussione riguardo il framework Qt nell'ambito del progetto didattico.
 
 
-## RECAP
+## **RECAP**
 
 Recap di quanto visto in questa lezione:
 
@@ -14,7 +14,7 @@ Recap di quanto visto in questa lezione:
 5.  Le string in Std non sono compatibili con le QString quindi sarà necessario usare il metodo QString::fromStdString() per effettuarne la conversione
 
 
-## Qt
+## **Qt**
 
 Qt è un framework cross-platform per la creazione di GUI e di applicazioni cross-platform;
 
@@ -30,7 +30,7 @@ Aggiunge a C++:
 4. Programmazione concorrente
 5. Programmaizone di rete
 
-### Come eseguire una applicazione 
+### *Come eseguire una applicazione*
 
 Per eseguire una applicazione in scritta in Qt:
 1. Installare Qt
@@ -43,7 +43,7 @@ Per eseguire una applicazione in scritta in Qt:
 8. Ripetere da 5 a 6
 
 
-## Primo codice in Qt
+## **Primo codice in Qt**
 
 ![HelloWorldQT](../assets/QtHELLOWORLD.png)
 
@@ -53,15 +53,15 @@ All'interno del main creiamo una QApplication che chiamiamo app (a cui possiamo 
 In questo caso semplice creiamo una variabile QLabel sullo stack che contiene il testo "Hello world!", ma se vogliamo che questa label venga mostrata dobbiamo invocare il metodo show() su di esso;
 Dobbiamo poi invocare il metodo exec() sulla nostra QApplication che gestisce tutto il ciclo di vita dell'applicazione senza chiusura al termine delle operazioni.
 
-## .pro e Makefile
+## **.pro e Makefile**
 
-### .pro
+### *.pro*
 
 Possiamo generare il file .pro dal comando "qmake -project" che cerca i file nella cartella relativi al progetto e ne genera il file il file .pro corretto
 
 ATTENZIONE: qmake non include automaticamente i widget nel file .pro, per cui dovremmo aggiungerli a mano editando il file aggiungendo QT += widgets
 
-### Makefile
+### *Makefile*
 
 Il comando "qmake" senza argomenti genera un Makefile (se è presente un file .pro);
 lanciando poi il comando "make" compilerà effettivamente in un esseguibile che possiamo lanciare con "./"
@@ -71,7 +71,7 @@ IMPORTANTE: provare con questi comandi in Linux dato che saranno usati per la va
 Se viene modificato un file esistente bisogna rilanciare il comando "make", mentre se viene aggiunto o rimosso un file bisognerà rilanciare anche il comando "qmake" e poi "make"
 
 
-## Esempio di strutture layout per un applicazione GUI
+## **Esempio di strutture layout per un applicazione GUI**
 
 ![GameLayout](../assets/QtLayout.png)
 
@@ -79,7 +79,7 @@ Identificare i blocchi che compongono la GUI sarà utile per l'implementazione i
 Ogni framework GUI funziona tramite blocchi rettangolari, container e stretch (o spacers), che servono ad organizzare la struttura della GUI;
 
 
-## Esempio di core model logico dell'applicazione
+## **Esempio di core model logico dell'applicazione**
 
 ![GameCore](../assets/CoreModel.png)
 
@@ -96,7 +96,7 @@ L'immagine rappresenta una diagramma UML, di seguito un cheatsheet:
 6. Italico per i metodi virtuali, grassetto per i virtuali puri
 
 
-## Separazione tra modello logico e GUI
+## **Separazione tra modello logico e GUI**
 
 ![GUIwidgets](../assets/GUIwidgets.png)
 
@@ -108,7 +108,7 @@ Lo schema sopra riportato vengono rappresentate anche le implementazioni dei blo
 Tutto cio che facciamo deve stare dentro il main window, che contine i widget della nostra applicazione.
 
 
-## Esempio di implementazione InfoPanel
+## **Esempio di implementazione InfoPanel**
 
 ![InfoPanelQT](../assets/InfoPanelQT.png)
 
@@ -119,7 +119,7 @@ ATTENZIONE: ogni volta che creiamo un widget dobbiamo usare questa macro
 Al costruttore passiamo anche QWidget* parent, cioé il genitore dei suoi rettangoli figli (per sapere dove attaccare il widget), ha un valore di default = 0
 
 
-## Struttura di un widget
+## **Struttura di un widget**
 
 ![WidgetStructure](../assets/WidgetConstructor.png)
 
@@ -136,7 +136,7 @@ Invoco poi il metodo addWidget sul layout appena creato per aggiungere l'etichet
 La logica è che verranno mostrati in ordine di aggiunta (come se fossero appended uno dopo l'altro)
 
 
-## Il metodo show()
+## **Il metodo show()**
 
 ![ShowMethod](../assets/ShowMethod.png)
 

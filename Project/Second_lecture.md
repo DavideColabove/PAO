@@ -1,11 +1,11 @@
-# Descrizione
+# **Descrizione**
 
-Discussione riguardo il framework Qt nell'ambito del progetto didattico.
+Discussione riguardo gli slot ed i segnali.
 
 
-## RECAP
+## **RECAP**
 
-### HeroPanel
+### *HeroPanel*
 
 Per quanto riguarda l'heroPanel abbiamo visto:
 1.  Uso di QHBoxLayout per disporre i widget orizzontalmente
@@ -14,7 +14,7 @@ Per quanto riguarda l'heroPanel abbiamo visto:
 4.  QPushButtons, il suo utilizzo ed alcune sue funzioni
 5.  Una funzione membro refresh() per incapsulare la logica di refresh
 
-### Battle widget
+### *Battle widget*
 
 Per il widget di battaglia abbiamo visto:
 1.  QVBoxLayout per disporre verticalmente i widget
@@ -22,7 +22,7 @@ Per il widget di battaglia abbiamo visto:
 3.  L'uso di addStretch() per aggiungere spaziatura ridimensionabile
 4.  Esporre le member function per reagire agli eventi
 
-### Main Window
+### *Main Window*
 
 Per le main window è bene ricordare:
 1.  MainWindow estende QMainWindow per ereditarietà pubblica
@@ -30,7 +30,7 @@ Per le main window è bene ricordare:
 3.  E' necessario utilizzare setCentralWidget per rendere visibile il widget che queste devono contenere altrimenti non viene visualizzato nulla
 
 
-## Esempio pannello eroe
+## **Esempio pannello eroe**
 
 ![HeroPanel](../assets/HeroPanel.png)
 
@@ -43,7 +43,7 @@ Qt mette a dispozione il widget QLabel che permette di rappresentare anche le im
 
 Abbiamo anche un metodo refresh() che si comporta analogamente al metodo show() nella lezione precedente
 
-### Costruttore del pannello eroe
+### *Costruttore del pannello eroe*
 
 ![HeroPanelConstructor](../assets/HeroPanelConstructor1.png)
 
@@ -62,7 +62,7 @@ Essendo questo il primo widget aggiunto, rispettando quanto definito nel QHBoxLa
 Creiamo infine l'hero panel visto nella lezione precedente (passato dal costruttore), ci invochiamo il metodo show() per mostrarlo e aggiungiamo il widget al layout
 Allo stesso modo dell'artwork esso troverà posto sempre in alto, sempre a sinistra ma subito dopo l'artwork stess (perche aggiunta in precedenza)
 
-### Pulsantiera dei comandi
+### *Pulsantiera dei comandi*
 
 ![HeroPanelButtons](../assets/HeroPanelButtons.png)
 
@@ -76,14 +76,14 @@ Creiamo i pulsanti QPushButton sempre con l'uso di un puntatore ad un oggetto di
 Una volta creato procediamo ad aggiungerlo alla pulsantiera prima creata QGridLayout sempre tramite il metodo addWidget a cui pero' dobbiamo specificare il nome del QPushButton (nel primo caso "attack"), la riga e la colonna che dovrà occupare (nel primo caso "0","0" essendo il primo elemento) ed infine il numero di celle verticali ed orizzontali che dovrà occupare (in tutti i casi di questo esempio saranno bottoni 1x1);
 Il procedimento per gli altri bottoni è analogo, negli altri due casi pero' viene invocata la member function setEnabled(false) che serve a disabilitare il pulsante (rendendolo non cliccabile, in grigio).
 
-### Funzione refresh
+### *Funzione refresh*
 
 ![HeroPanelButtons](../assets/HeroPanelButtons.png)
 
 Funzionamento molto semplice, analogo a show(), infatti viene invocata la funzione show() su info per ridisegnare cio' che potrebbe essere cambiato dopo l'attacco
 
 
-## Esempio widget di Battaglia
+## **Esempio widget di Battaglia**
 
 ![BattleWidget](../assets/BattleWidget.png)
 
@@ -106,7 +106,7 @@ Avremo poi bisogno di un metodo pubblico playerAttacks() per gestire la battagli
 
 A riga 13 vediamo che oltre alla keyword public abbiamo anche slots che il compilatore ignora;
 
-### Costruttore widget di Battaglia
+### *Costruttore widget di Battaglia*
 
 ![BattleWidgetConstructor](../assets/BattleWidgetConstructor.png)
 
@@ -118,7 +118,7 @@ Viene invocata a riga 9 la member function addStretch() che ci permette di crear
 
 Infine creiamo un HeroPanel  a cui passiamo il riferimento all'eroe e lo aggiungiamo al layout.
 
-### Funzione playerAttacks()
+### *Funzione playerAttacks()*
 
 ![playerAttacks](../assets/BattleWidget_playerAttacks.png)
 
@@ -128,7 +128,7 @@ Quello che succede è che il player attacca il mostro, il quale vedrà i propri 
 Di risposta il mostro attacca l'eroe, il quale ridurra i punti ferita del player e allora verrà invocato il metodo refresh() sull'heroPanel che a sua volta invocherà il metodo show() sull'infoPanel agggiornando le informazioni dell'eroe.
 
 
-## La MainWindow
+## **La MainWindow**
 
 ![MainWindow](../assets/MainWindow.png)
 
@@ -141,7 +141,7 @@ Nel codice del costruttore andiamo ad istanziare una Battle passando il riferime
 A riga 3 diciamo di mostrare il widget della battaglia appena creata.
 
 
-## Il file Main.cpp
+## **Il file Main.cpp**
 
 ![Main.cpp](../assets/MainFile.png)
 
@@ -154,7 +154,7 @@ Tramite il metodo resize() invocato sulla main window creata in precedenza possi
 Invochiamo poi il metodo show() per mostrare la main window, ed infine invochiamo il metodo exec() sulla QApplication app creata in precedenza per controllarne il ciclo di vita.
 
 
-## Riassunto Layout e strutture
+## **Riassunto Layout e strutture**
 
 ![LayoutStructureWrapUp](../assets/LayoutStructureWrapUp.png)
 
@@ -176,7 +176,7 @@ I layout invece:
 4.  Si occupano della disposizione dei widget nello spazio
 
 
-## Comportamento logico su input grafico
+## **Comportamento logico su input grafico**
 
 ![AttackClick](../assets/AttackClick.png)
 
@@ -188,7 +188,7 @@ Questa serie di operazioni la possiamo vedere come una catena di eventi che succ
 Diremo quindi che c'è un evento che si attiva al click sul pulsante;
 
 
-## Event driven programming
+## **Event driven programming**
 
 ![EventDrivenProgramming](../assets/EventDrivenProgramming.png)
 
@@ -219,7 +219,7 @@ L'heroPanel è l'unico che puo' quindi collegarsi a quel pulsante percio' dobbia
 La classe Battle puo' connettersi al segnale personalizzato attack, quando viene emesso il segnale heroPanel di attack il widget della battaglia sa che deve rispondere con la simulazione della battaglia.
 
 
-### Signals
+### *Signals*
 
 ![SinglasDeclaration](../assets/SinglasDeclaration.png)
 
@@ -231,7 +231,7 @@ I segnali si dichiarano allo stesso modo delle member functions, cioè un tipo c
 ATTENZIONE: I segnali vanno solo dichiarati ma mai implementati (in questo caso, abbiamo la dichiarazione in HeroPanel.h ma non l'implementazione in HeroPanel.cpp) perchè i segnali non hanno un comportamento da svolgere ma solo una segnalazione che un certo evento si è scatenato
 
 
-### Slots 
+### *Slots*
 
 ![SlotsDelcaration](../assets/SlotsDelcaration.png)
 
@@ -241,7 +241,7 @@ ATTENZIONE: Uno slot è anche una member functions quindi puo' essere usata come
 
 A differenza dei segnali, gli slot devono sempre essere implementati;
 
-#### Signals connected to slots
+#### *Signals connected to slots*
 
 ![SignalsConnectedToSlots](../assets/SignalsConnectedToSlots.png)
 
@@ -261,7 +261,7 @@ connect(source_widget, signal, destination_widget, slot)
 
 (puntatore a funzione:  &NomeClasse::memberFunction)
 
-#### Signals connected to signals
+#### *Signals connected to signals*
 
 ![SignalsConnectedToSignals](../assets/SignalsConnectedToSignals.png)
 
@@ -269,7 +269,7 @@ Abbiamo pero' detto che bisogna anche connettere la pressione del pulsante attac
 
 Alla riga 11 c'è la connessione che ci interessa: quello che deve succedere è che il pulsante attack, alla pressione (Qt sa che quando un QPushButton è premuto verrà emesso il segnale "pressed" senza bisogno di controllarlo manualmente), a gestire questo segnale sarà il widget stesso (quindi this) e dovrà propagare il segnale tramite il segnale attack;
 
-#### Self connected signals and self connected slots
+#### *Self connected signals and self connected slots*
 
 ![SelfConnected](../assets/SelfConnected.png)
 
@@ -280,7 +280,7 @@ Con segnali e slot possiamo creare infinite combinazioni, alcuni esempi nella fi
 3.  Input multipli su un singolo slot, da prestare attenzione perche i segnali sono indipendenti e si attiverà lo slot O tramite segnale 1 di widget 1 O tramite segnale 1 di widget 3 (possiamo vederlo come un OR), non possiamo richiedere concorrenza, ne ordinamento (ad esempio lo slot 1 si attiva solo se riceve prima widget 3 che widget 1 o viceversa ecc..): SI PUO FARE TRAMITE ESCAMOTAGE DA NOI SVILUPPATI, MA NON NATIVAMENTE 
 
 
-## Argomenti propagati per tramite segnali
+## **Argomenti propagati per tramite segnali**
 
 ![SignalArguments](../assets/SignalArguments.png)
 

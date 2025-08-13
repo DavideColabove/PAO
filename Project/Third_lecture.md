@@ -1,47 +1,43 @@
-# Descrizione
+# **Descrizione**
 
-Discussione riguardo il framework Qt nell'ambito del progetto didattico.
-
-
-## RECAP
-
-### HeroPanel
-
-Per quanto riguarda l'heroPanel abbiamo visto:
-1.  Uso di QHBoxLayout per disporre i widget orizzontalmente
-2.  QPixmap e QLabel per le immagini
-3.  QGridLayout per creare un layout a griglia per i widget
-4.  QPushButtons, il suo utilizzo ed alcune sue funzioni
-5.  Una funzione membro refresh() per incapsulare la logica di refresh
-
-### Battle widget
-
-Per il widget di battaglia abbiamo visto:
-1.  QVBoxLayout per disporre verticalmente i widget
-2.  L'aggregazione di altri widget (heroPanel e monsterPanel)
-3.  L'uso di addStretch() per aggiungere spaziatura ridimensionabile
-4.  Esporre le member function per reagire agli eventi
-
-### Main Window
-
-Per le main window è bene ricordare:
-1.  MainWindow estende QMainWindow per ereditarietà pubblica
-2.  E' un oggetto e necessità della macro Q_OBJECT
-3.  E' necessario utilizzare setCentralWidget per rendere visibile il widget che queste devono contenere altrimenti non viene visualizzato nulla
+Discussione riguardo il polimorfismo in Qt.
 
 
-## Esempio pannello eroe
+## **RECAP**
 
-![HeroPanel](../assets/HeroPanel.png)
 
-Il pannello dell'eroe contiene 3 elementi al suo interno:
-1.  Una artwork
-2.  Un pannello delle informazioni che abbiamo realizzato nella lezione precedente
-3.  Un bottone per avviare la lotta
+## **Esempio di polimorfismo**
 
-Qt mette a dispozione il widget QLabel che permette di rappresentare anche le immagini, senza necessità di definirne uno personalizzato;
+![Magic](../assets/Magic.png)
 
-Abbiamo anche un metodo refresh() che si comporta analogamente al metodo show() nella lezione precedente
+Prendiamo come esempio il gioco di carte "Magic: The Gathering" in cui notiamo che la struttura della carta è pressochè la stessa ma differiscono in base al loro tipo: ad esempio le terre hanno un proprio colore e non hanno attributi ne costo, le creature al contrario hanno un costo e delle abilità, mentre gli artefatti hanno sempre un costo ma hanno un effetto.
+
+Come rappresentiamo quindi queste 3 tipologie di dato concreto differenti se dovessimo implementare un gioco come "Magic: The Gathering"?
+
+![MagicImplementation](../assets/MagicImplementation.png)
+
+In questa rappresentazione vediamo che la carta ha una member funtion che restituisce il nome, mentre i vari sottotipi di carta hanno member functions differenti tra loro (getColor(), getAbilities(),...);
+
+
+## **Visitor**
+
+Nel nostro running example l'infoPanel dell'eroe e del mostro avevamo previsto avere un attriuto specifico per loro esclusivo, l'eroe ha come attributo aggiuntivo il danno dell'arma ed il mostro ha un moltiplicatore dato dal numero di arti;
+
+![Visitor1](../assets/Visitor1.png)
+
+### Approcci errati o non ottimali
+
+I seguenti approcci potrebbero funzionare per proggetti di piccolissime dimensioni ma sono molto inclini a fallire in progetti piu' grandi:
+
+1.  Funzione std::string Character::getContent()
+2.  Funzione QWidget* Character::render() 
+3.  RTTI / Dynamic Cast / typeid
+4.  Funzione std::string Character::getType()
+
+
+
+
+
 
 ### Costruttore del pannello eroe
 
