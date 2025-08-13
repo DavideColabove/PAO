@@ -25,7 +25,7 @@ Nel nostro running example l'infoPanel dell'eroe e del mostro avevamo previsto a
 
 ![Visitor1](../assets/Visitor1.png)
 
-### Approcci errati o non ottimali
+### *Approcci errati o non ottimali*
 
 I seguenti approcci potrebbero funzionare per proggetti di piccolissime dimensioni ma sono molto inclini a fallire in progetti piu' grandi:
 
@@ -34,6 +34,14 @@ I seguenti approcci potrebbero funzionare per proggetti di piccolissime dimensio
 3.  RTTI / Dynamic Cast / typeid
 4.  Funzione std::string Character::getType()
 
+Motivazioni:
+1.  Dotando la classe Character di una member function virtuale pura che restituisce la stringa da mostrare, restituendo nel caso dell'eroe "Weapon Damage " + la conversione in stringa del danno dell'arma e nel caso del mostro la stringa "Arms Multiplier" e restituendo il moltiplicatore per il numero di braccia;
+Si riesce a fare ma sarà facilmente passibile di errori.
+2.  Doto la classe Character di una member function render() che a seconda del fatto che sia un eroe o un mostro costruisce il widget adatto a come deve essere: il problema è che crea un raddoppio di widget ed accoppiamento eccessivo di modello logico e GUI violando la separazione tra GUI e modello logico;
+(Problema anche con traduzioni)
+3.  E' già piu' accettabile in quanto implementato direttamente per la parte grafica, ad esempio possiamo controllare nell'infoPanel se quello che viene passato è un eroe o un mostro tramite dynamic_cast e quindi mostrare esattamente cio' che serve.
+Ha anch'esso dei problemi: dovendo aggiungere classi in ottica futura, si ha a che fare con if ed else per controllare il tipo dinamico che pero' cambia quando introduciamo una nuova classe. Inotlre risulta problematico anche l'ordinamento dei controlli e sopratutto in casi di ereditarietà multipla;
+4.  Infine l'ultima versione con getType() non da nulla in piu' rispetto al dynamic_cast, ma utilizzandolo aggiungiamo anche member functions inutili al fine del funzionamento
 
 
 
