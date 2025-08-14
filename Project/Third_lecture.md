@@ -1,6 +1,6 @@
 # **Descrizione**
 
-Discussione riguardo il polimorfismo in Qt.
+Discussione riguardo il polimorfismo in Qt ed all'uso dei Visitor.
 
 
 ## **RECAP**
@@ -9,7 +9,7 @@ Discussione riguardo il polimorfismo in Qt.
 
 1.  Separa la struttura dati dalla rappresentazione visiva
 2.  Estende dinamicamente le funzionalità della classe
-3.  Error-checking assistito dal compilatore
+3.  Error-checking assistito dal compilatore (quando aggiungiamo un nuovo tipo concreto il compilatore ci segnala tutte le implementazioni mancanti per gestire questo nuovo tipo di dato)
 4.  Design pattern consolidato
 Al costo di un po' piu' di codice
 
@@ -77,262 +77,113 @@ Il parametro che riceve è un puntatore o un riferimento ad una istanza dell'int
 
 ![VisitorAcceptImplementation](../assets/VisitorAcceptImplementation.png)
 
-L'implementaizone corretta della member function accept() è one liner in cui il visitor che sta visitando la classe concreta vede invocato il proprio metodo visitCorretto(Hero o Monster) ed in entrambi i casi richiedono l'oggetto da visitare che è this (*this se passiamo ad accept() un riferimento o &this se passiamo ad accept() un puntatore)
+L'implementaizone corretta della member function accept() è one liner in cui il visitor che sta visitando la classe concreta vede invocato il proprio metodo visitCorretto(Hero o Monster) ed in entrambi i casi richiedono l'oggetto da visitare che è this (*this se passiamo ad accept() un riferimento o &this se passiamo ad accept() un puntatore);
+Attraverso il metodo accept() stiamo andando a realizzare il polimorfismo, in quanto questro metodo virtuale accept() sceglie l'algoritmo di visita correta in base al tipo concreto del nostro Character.
 
+### *Esempio di visitor concreto per widget adatto al tipo*
 
+![Visitor3](../assets/Visitor3.png)
 
+Ci servirà quindi una classe il cui compito sarà visitare un Character e costruire il widget opportuno.
+Il visitor ritorna direttamente il widget costruito ma inseriamo un attributo privato QWidget* che costruirà il widget durante la visita ed al ritorno possiamo invocare una funzione ausiliaria come getWidget() per ritornare il widget costruito;
 
+![Visitor4](../assets/Visitor4.png)
 
+L'implementazione della classe è la seguente:
+1.  Il metodo getWidget() ritorna semplicemente il widget costruito;
+2.  Il metodo visitHero() inserisce nel puntatore QWidget* widget il puntatore che ci interessa quindi quando visitiamo un eroe vogliamo che il widget da mostrare sia una QLabel  che contiene la scritta "Weapon Damage" seguita dal valore numerico di questo danno ecc..
+3.  Il metodo visitMonster() fa la stessa identica cosa cambiando il testo nella label ed accedendo ad un attributo diverso per il numero di arti;
 
+![Visitor5](../assets/Visitor5.png)
 
+Nella classe infoPanel invece dalla riga 8 alla riga 10 è riportata l'implementazione di questo visitor;
+Dichiariamo una variabile CharacterInfoVisitor e sul Character (che non sappiamo di che tipo sia, puo' essere Mostro o Eroe a seconda dell'invocazione) invochiamo il metodo accept() passando il visitor concreto appena creato;
+Infine viene aggiunto al layout il widget creato dal visitor tramite una invocazione di getWidget() sul visitor creato in precedenza che aggiungerà il widget corretto al layout.
 
-### Costruttore del pannello eroe
+### *Vantaggi e svantaggi*
 
-![HeroPanelConstructor](../assets/HeroPanelConstructor1.png)
+![VisitorAdv&Disadv](../assets/VisitorAdv&Disadv.png)
 
-Usiamo questa volta QHBoxLayout per disporre in orizzonale i widget necessari, percio' dichiariamo un puntatore di tipo QHBoxLayout layout sul quale invochiamo il metodo setAlignment per definire il posizionamento dei widget al suo interno (se non lo facessimo Qt userebbe la disposizone di default)
+Lo svantaggio notevole è il maggior codice da scrivere, ma piu' visitor vengono utilizzati piu' questo effetto diventa leggero;
 
-Inizializziamo una variabile di tipo QPixmap di nome image (un oggetto QPixmap è una mappa di pixel ovvero un raster) per l'artwork dell'eroe: al costruttore passiamo il percorso di dove trovare questa immagine.
-Nel percorso notiamo " (":assets/" + QString::forStdString(hero.getName()) + ".png") questo parametro passato al costruttore dice che:
-1.  L'artwork si trova nella cartella "assets/", grazie al ":" capisce di non dover cercare tra i file di sistema ma nella specificia cartella
-2.  Appende poi il nome dell'eroe ottenuto dalla conversione dell'output della funzione getName() su hero in una QString
-3.  Appende infine l'estensione ".png"
 
-Possiamo ora creare una QLabel artwork e per dire che deve mostrare l'immagine appena creata usiamo la member function setPixmap() a cui passiamo l'immagine dell'eroe sulla quale viene invocata la funzione scaledToHeight(256) per ridimensionare l'immagine mantenendo inalterato il rapporto
+## **Observer**
 
-Essendo questo il primo widget aggiunto, rispettando quanto definito nel QHBoxLayout alignment, l'artwork troverà posto piu' in alto possibilie e piu' a sinistra possibile; 
+![Observer1](../assets/Observer1.png)
 
-Creiamo infine l'hero panel visto nella lezione precedente (passato dal costruttore), ci invochiamo il metodo show() per mostrarlo e aggiungiamo il widget al layout
-Allo stesso modo dell'artwork esso troverà posto sempre in alto, sempre a sinistra ma subito dopo l'artwork stess (perche aggiunta in precedenza)
+Il limite che vorremmo superare con gli observer sta nella member function playterAttacks(), che concettualmente dovrebbe fare solo 2 cose:
+Eroe -> attacca -> Mostro
+Mostro -> attacca -> Eroe;
+Basterebbero evidentemente 2 righe di codice, ma attualmente ne abbiamo 4 perche ci stiamo portando la responsabilità di aggiornare la visualizzazione degli infoPanel relativa ai punti ferita;
 
-### Pulsantiera dei comandi
+L'observer risolve il problema di capire quando qualcosa ha avuto delle modifiche e rispondere di conseguenza (tipicamente aggiornando la visualizzazione in tempo reale senza aspettare che qualcuno chiami il metodo)
 
-![HeroPanelButtons](../assets/HeroPanelButtons.png)
+### *Il problema*
 
-La pulsantiera dei comandi utilizza il layout a griglia, che è idealmente una scacchiera in cui possiamo inserire degli altri widget tramite il loro indice di posizione;
+Possiamo descrivere il problema come:
+1.  Info dovrebbe essere collegato al personaggio che sta rappresentando 
+2.  Info dovrebbe aggiornarsi automaticamente quando cambia qualcosa nel proprio stato, senza intervento del programmatore
+3.  L'approccio corrente inserisce in Battle la logica di aggiornamento della visualizzazione
 
-Utilizziamo un puntatore a QGridLayout chiamato commands e creiamone uno tramite il new QGridLayout();
-Non sarà direttamente figlio del widget ma andrà innestato dentro il QHBoxLayout creato prima.
+### *La soluzione*
 
-Andiamo poi a creare i 3 pulsanti che vogliamo mostrare:
-Creiamo i pulsanti QPushButton sempre con l'uso di un puntatore ad un oggetto di tipo QPushButton e creiamone uno con la new al cui costruttore passiamo l'etichetta di cio' che vogliamo scritto nel pulsante (un po' come con le QLabel)
-Una volta creato procediamo ad aggiungerlo alla pulsantiera prima creata QGridLayout sempre tramite il metodo addWidget a cui pero' dobbiamo specificare il nome del QPushButton (nel primo caso "attack"), la riga e la colonna che dovrà occupare (nel primo caso "0","0" essendo il primo elemento) ed infine il numero di celle verticali ed orizzontali che dovrà occupare (in tutti i casi di questo esempio saranno bottoni 1x1);
-Il procedimento per gli altri bottoni è analogo, negli altri due casi pero' viene invocata la member function setEnabled(false) che serve a disabilitare il pulsante (rendendolo non cliccabile, in grigio).
+Cio' che cerchiamo di fare con l'observer è:
+1.  Rimuovere la logica dell'aggiornamento della visualizzazione da Battle
+2.  Collegare direttamente Info con il proprio Character
+3.  Far in modo che Character notifichi il suo Info quando avviene un cambio di stato
 
-### Funzione refresh
+Info sta quindi *osservando* Character
 
-![HeroPanelButtons](../assets/HeroPanelButtons.png)
 
-Funzionamento molto semplice, analogo a show(), infatti viene invocata la funzione show() su info per ridisegnare cio' che potrebbe essere cambiato dopo l'attacco
+## **Pattern di un observer**
 
+![ObserverPattern](../assets/ObserverPattern.png)
 
-## Esempio widget di Battaglia
+Ci servirà quindi una nuova interfaccia che chiameremo CharacterObserverInterface che esporrà un solo metodo notify() che riceve la notifica da parte di un Character (passato per riferimento o puntatore in base ai casi d'uso) quando questo effettua un cambiamento, il tipo di ritorno è sempre void;
 
-![BattleWidget](../assets/BattleWidget.png)
+Siccome sono i Character ad essere osservati dotiamo la classe Character di un attributo privato di un vettore di puntatori ad CharacterObserverInterface*, che si tratta di puntatori ad una classe astratta quindi ci sarà diversi osservatori concreti (essendo dati atratti tutto accadrà tramite polimorfismo).
+Dotiamo anche la classe di un metodo non virtuale registerObserver() il cui parametro passato è un puntatore od un riferimento a CharacterObserverInterface o una classe concreta figlia di tale classe astratta;
 
-La scena della battaglia potremmo definirilo come lo schermo principale del nostro sketch che mostra:
-1.  In alto il pannello del mostro (ipotizziamo di averlo creato analogamente a quello dell'eroe)
-2.  Al centro una spaziatura
-3.  Nella parte inferiore il pannello dell'eroe con la relativa pulsantiera
+![Observer2](../assets/Observer2.png)
 
-E' anch'esso un widget e lo realizziamo estendendo pubblicamente la classe QWidget e utilizziamo la macro Q_OBJECT
+La classe astratta CharacterObserverInterface ha un singolo metodo virtuale puro notify() che si aspetta un riferimento o puntatore ad un Character
 
-Questa classe necessiterà di alcuni attributi:
-1.  L'HeroPanel
-2.  Il MonsterPanel (ovvi, in quanto andranno mostrati qui dentro)
-3.  Un riferimento al mostro
-4.  Un riferimento all'eroe (per interagirci direttamente)
+![Observer3](../assets/Observer3.png)
 
-Il costruttore di questa classe Battle necessiterà dei prima citati riferimenti al mostro ed all'eroe, ed un puntatore QWidget alla classe padre = 0
+La classe Character verrà dotata di un vettore di puntatori a CharacterObserverInterface, un vettore perche generalmente si usa piu' di un osservatore per valutare diversi cambiamenti
 
-Avremo poi bisogno di un metodo pubblico playerAttacks() per gestire la battaglia: il giocatore effettua il suo attacco, il mostro riceve il danno, vede i propri punti ferita diminuire ed il mostro ribatte con il suo attacco;
+![Observer4](../assets/Observer4.png)
 
-A riga 13 vediamo che oltre alla keyword public abbiamo anche slots che il compilatore ignora;
+Il metodo non virtuale per aggiungere un ossevatore a questo personaggio ha è implementato alla riga 8 che fa un push_back dell'osservatore nel vettore degli oggetti osservati;
 
-### Costruttore widget di Battaglia
+Nella parte superiore dell'immagine vediamo l'utilizzo degli observer quando essi vengono interpellati:
+In takeDamage() siccome gli hitpoint potrebbero essere cambiati allora con un ciclo for accediamo a tutti gli osservatori nel nostro vettore di osservatori e per ciascuno di questi osservatori invochiamo la member funtion notify() passando come parametro *this, in questo modo l'osservatore riceverà una versione aggiornata dell'oggetto che è stato modificato e potrà intervenire.
 
-![BattleWidgetConstructor](../assets/BattleWidgetConstructor.png)
+![Observer5](../assets/Observer5.png)
 
-Per prima cosa ne definiamo il costuttore inizializzando la superclasse QWidget, i puntatori ad hero ed a monster;
+Applicandolo al nostro running example la classe Info oltre ad essere un widget dovrà essere anche un Observer utilizzando l'ereditarietà multipla;
+Per farlo dobbiamo ereditare sia da QWidget che da CharacterObserverInterface ed aggiungere la member function notify() alla quale passiamo un riferimento ad un Character;
+La sua implementazione sarà la seguente:
 
-Vediamo di nuovo l'utilizzo di un QVBoxLayout, la creaizone di un MonsterPanel a cui passiamo il riferimento al mostro e lo aggiungiamo al layout.
+![Observer6](../assets/Observer6.png)
 
-Viene invocata a riga 9 la member function addStretch() che ci permette di creare dello spazio vuoto tra i due pannelli.
+A riga 11 vediamo che assomiglia molto a quella in show(), ma modifichiamo l'unico pezzo di interfaccia che potrebbe essere stato modificato: nell'etichetta che mostra i punti ferita inserendo "HP: " + la conversione da numero a QString dei punti ferita attuali (che magari potrebbero essere cambiati) ecc..
 
-Infine creiamo un HeroPanel  a cui passiamo il riferimento all'eroe e lo aggiungiamo al layout.
+Cambia anche il costruttore perchè finchè non registriamo un osservatore non succede nulla, quindi quando costruiamo l'infoPanel invochiamo la member function registerObserver() sul personaggio da osservare passaando questo oggetto come ossevatore tramite this;
+Cosi facendo quando l'infoPanel viene creato diventa immediatamente un osservatore del personaggio e da quel momento in poi che viene invocata takeDamage() su quel Character si aggiornerà tramite la notify().
 
-### Funzione playerAttacks()
+Possiamo quindi rimuovere la member function refresh() da HeroPanel e MonsterPanel in quanto non piu' necessaria;
 
-![playerAttacks](../assets/BattleWidget_playerAttacks.png)
+![Observer7](../assets/Observer7.png)
 
-Questa funzione gestirà la battaglia utilizzando la logica presente nel modello
+L'implementazione del metodo playerAttacks() diventerà piu' semplice.
 
-Quello che succede è che il player attacca il mostro, il quale vedrà i propri punti ferita ridursi invocando il metodo refresh() sul monsterPanel il quale a sua volta chiamerà il metodo show() sull'infoPanel aggiornando le informazioni del pannello tra cui i punti ferita del mostro;
-Di risposta il mostro attacca l'eroe, il quale ridurra i punti ferita del player e allora verrà invocato il metodo refresh() sull'heroPanel che a sua volta invocherà il metodo show() sull'infoPanel agggiornando le informazioni dell'eroe.
 
 
-## La MainWindow
 
-![MainWindow](../assets/MainWindow.png)
 
 
-E' un tipo specifico in Qt che viene utilizzato per la finestra principale, nel concreto quello che succede generalmente è che verrà scritto il codice per un certo numero di widget e poi si scriverà il codice di una singola main window;
 
-Essa è comunque un QObject quindi servirà la macro Q_OBJECT e si estende la classe QMainWindow e necessiterà solo di un costruttore a cui passeremo un riferimento all'eroe ed uno al mostro;
-
-Nel codice del costruttore andiamo ad istanziare una Battle passando il riferimento all'eroe ed al mostro;
-A riga 3 diciamo di mostrare il widget della battaglia appena creata.
-
-
-## Il file Main.cpp
-
-![Main.cpp](../assets/MainFile.png)
-
-Il file Main.cpp servirà come punto di partenza della nostra applicazione;
-
-Dobbiamo quindi istanziare una QApplication app a cui passiamo due argomenti qualora ce ne fosse la necessità;
-In questo caso andiamo a creare "manualmente" "(solitamente si legge da un database, o da un file di testo, o da un file JSON,...) l'eroe ed il mostro e li passiamo alla main window che andremo ad usare;
-
-Tramite il metodo resize() invocato sulla main window creata in precedenza possiamo definire la dimensione di apertura di default della main window.
-Invochiamo poi il metodo show() per mostrare la main window, ed infine invochiamo il metodo exec() sulla QApplication app creata in precedenza per controllarne il ciclo di vita.
-
-
-## Riassunto Layout e strutture
-
-![LayoutStructureWrapUp](../assets/LayoutStructureWrapUp.png)
-
-Ricordiamo che i widgets sono elementi che vediamo effettivamente come etichette, immagini, pulsanti ecc..
-I layout al contrario sono dei concetti di disposizione degli elementi, ma ne vediamo gli effetti;
-
-Questi elementi in genere sono organizzati in un struttura dati ad albero, con un certo numero di figli il quale a sua volta puo' avere altri figli.
-
-I widgets:
-1.  Sono organizzati in una struttura ad albero
-2.  Hanno legami di parentela padre-figlio
-3.  Funzionano a composizione (eg. HeroPanel è composto da Artwork, Info ecc..)
-4.  Vengono distrutti automaticamente da Qt
-
-I layout invece:
-1.  Contengono widgets
-2.  Sono contenuti in widgets
-3.  Organizzano contenuti
-4.  Si occupano della disposizione dei widget nello spazio
-
-
-## Comportamento logico su input grafico
-
-![AttackClick](../assets/AttackClick.png)
-
-La nostra applicazione dovrà fare qualcosa in determinate circostanze, nel nostro caso l'unica fonte di interazione sarà il bottone "attack" che, quando premuto dovrà andare ad invocare la funzione playerAttacks() definita in battle_scene;
-Al suo interno viene gestita la logica della battaglia quindi l'eroe attacca il mostro, il mostro risponde attaccando l'eroe e successivamente si aggiornano i punti ferita di entrambi grazie all'invocazione di refresh() in hero_panel e monster_panel chiamate da playerAttacks();
-
-Questa serie di operazioni la possiamo vedere come una catena di eventi che succedono uno dopo l'altro, in particolare in seguito alla pressione del pulsante di attacco.
-
-Diremo quindi che c'è un evento che si attiva al click sul pulsante;
-
-
-## Event driven programming
-
-![EventDrivenProgramming](../assets/EventDrivenProgramming.png)
-
-Questa gestione degli eventi in Qt è stata implementata tramite segnali e slot: vengono gestiti via codice ma prendiamo come riferimento l'immagine sopra per maggior chiarezza;
-
-I rettangoli rappresentano i widgets (in altro il nome del widget in questione), nella parte superiore dei rettangoli abbiamo i segnali che possiedono dei connettori sia a destra che a sinistra: i connettori ci suggeriscono che possiamo avere sia degli input sia degli output (quelli a destra sono input e quelli a sinista sono output);
-Nella parte inferiore dei rettangoli abbiamo cio' che Qt chiama slot, che a differenza dei segnali non possono avere nessun output ma hanno soltanto degli input;
-Notiamo che i connettori si possono connettere in modo che l'output di un segnale sia l'input di un altro segnale od uno slot.
-
-I SEGNALI: sono i possibili eventi che un widget puo' emettere (eg. il QPushButton prevede la possibilità di emettere il segnale "pressed");
-
-GLI SLOT: sono le possibili reazioni, quello che puo' avvenire in risposta ad un segnale scatenato da un evento.
-
-I COLLEGAMENTI: sono un'astrazione di una relazione del tipo "dato evento scatena tale reazione";
-
-Abbiamo visto che i segnali hanno connettori sia di input che di output: è chiaro come quello di output nel QPushButton è il segnale emesso alla pressione del pulsante che indica che tale pulsante è stato premuto;
-Qt permette di realizzare la propagazione di segnale cioè attivando un secondo segnale mediante il primo.
-
-![SignalOurGame](../assets/SignalOurGame.png)
-
-Nel nostro esempio, il QPushButton emetterà il segnale "pressed" (nativamente presente in Qt) quello che vogliamo in risposta è l'attivazione dello slot playerAttacks() nella classe Battle.
-
-Quello che fa la keyword slots nella definizione di una classe è dichiarare che i metodi successivi sono utilizzabili come slot (dal punto di vista pratico non c'è alcuna differenza tra uno slot ed un metodo privato o pubblico).
-
-Il metodo che vogliamo attivare è playerAttacks() ma c'è un problema, nella classe battle non possediamo un riferimento al QPushButton quindi non possiamo collegarci a quel pulsante per rimanere in ascolto del segnale di pressione perche non abbiamo puntatori o riferimenti a quel pulsante;
-Al contrario, il costruttore dell'heroPanel alloca il pulsante nella pulsantiera presente nell'heroPanel;
-L'heroPanel è l'unico che puo' quindi collegarsi a quel pulsante percio' dobbiamo utilizzare il relay di segnale: la classe heroPanel esporrà il proprio segnale attack e collegherà la pressione del pulsante attacca a questo segnale creando un relay di segnale.
-La classe Battle puo' connettersi al segnale personalizzato attack, quando viene emesso il segnale heroPanel di attack il widget della battaglia sa che deve rispondere con la simulazione della battaglia.
-
-
-### Signals
-
-![SinglasDeclaration](../assets/SinglasDeclaration.png)
-
-Nell'heroPanel l'implementazione dei segnali porta una unica differenza, cioè che deve essere dichiarato un nuovo segnale (vedi riga 10 e 11);
-I segnali non hanno modificatori di accesso, sono sempre tutti pubblici.
-Utilizziamo l'etichetta signals che indica che tutto cio' che c'è da li in poi va considerato come segnale.
-I segnali si dichiarano allo stesso modo delle member functions, cioè un tipo che sarà quasi sempre void, il nome del segnale e tra parentesi gli argomenti che vogliamo che il nostro segnale trasporti;
-
-ATTENZIONE: I segnali vanno solo dichiarati ma mai implementati (in questo caso, abbiamo la dichiarazione in HeroPanel.h ma non l'implementazione in HeroPanel.cpp) perchè i segnali non hanno un comportamento da svolgere ma solo una segnalazione che un certo evento si è scatenato
-
-
-### Slots 
-
-![SlotsDelcaration](../assets/SlotsDelcaration.png)
-
-Gli slot abbiamo anticipato essere in tutto e per tutto uguali a delle normali member functions quindi si tratta solo di aggiungere la parola chiave slots dopo public;
-
-ATTENZIONE: Uno slot è anche una member functions quindi puo' essere usata come invocazione di metodo, ma non il contrario (se un metodo non è dicharato come slot allora non è possibile utilizzarlo come slot)
-
-A differenza dei segnali, gli slot devono sempre essere implementati;
-
-#### Signals connected to slots
-
-![SignalsConnectedToSlots](../assets/SignalsConnectedToSlots.png)
-
-L'implementazione nel nostro esempio è molto semplice: l'eroe attacca il mostro ed aggiorna i punti ferita del mostro, il mostro attacca l'eroe ed aggiorna l'interfaccia;
-
-Avere segnali e slot non significa che siano connessi automaticamente (perche Qt non ha idea di cosa vogliamo connettere a cosa), ma starà a noi utilizzare la member function connect() presente nelle nostre classi in quanto ereditate da QWidget.
-Quello che dobbiamo fare nella classe della battaglia è dire che il segnale attack nell'heroPanel andrà connesso allo slot playerAttacks di battle
-
-La member function connect() ha bisogno di 4 argomenti:
-
-connect(source_widget, signal, destination_widget, slot)
-
-1.  L'oggetto che potrà emettere il segnale che ci interessa
-2.  Il segnale che ci interessa gestire rappresentato tramite puntatore a funzione
-3.  Oggetto che riceverà e gestirà quel segnale
-4.  Lo slot che risponderà a quel segnale o un altro segnale (se utilizziamo relay di segnali), anche questo rappresentato tramite puntatore a funzione
-
-(puntatore a funzione:  &NomeClasse::memberFunction)
-
-#### Signals connected to signals
-
-![SignalsConnectedToSignals](../assets/SignalsConnectedToSignals.png)
-
-Abbiamo pero' detto che bisogna anche connettere la pressione del pulsante attack con l'emissione da parte di heroPanel del segnale attack, quindi per fare questo dobbiamo utilizzare un altro segnale (per fare un relay di segnale) e lo possiamo fare nel costruttore di heroPanel.
-
-Alla riga 11 c'è la connessione che ci interessa: quello che deve succedere è che il pulsante attack, alla pressione (Qt sa che quando un QPushButton è premuto verrà emesso il segnale "pressed" senza bisogno di controllarlo manualmente), a gestire questo segnale sarà il widget stesso (quindi this) e dovrà propagare il segnale tramite il segnale attack;
-
-#### Self connected signals and self connected slots
-
-![SelfConnected](../assets/SelfConnected.png)
-
-Con segnali e slot possiamo creare infinite combinazioni, alcuni esempi nella figura precedente.
-
-1.  Un singolo segnale puo essere connesso a piu' slot e/o piu segnali (nessun vincolo) (per fare cio' basta chiamare la connect() tante volte, una per ogni connessione che si vuole effettuare)
-2.  Autoconnessione: il widget 5 emette un segnale 1 che si connette al suo stesso slot 1 (comodo a volte in caso di relay di segnali)
-3.  Input multipli su un singolo slot, da prestare attenzione perche i segnali sono indipendenti e si attiverà lo slot O tramite segnale 1 di widget 1 O tramite segnale 1 di widget 3 (possiamo vederlo come un OR), non possiamo richiedere concorrenza, ne ordinamento (ad esempio lo slot 1 si attiva solo se riceve prima widget 3 che widget 1 o viceversa ecc..): SI PUO FARE TRAMITE ESCAMOTAGE DA NOI SVILUPPATI, MA NON NATIVAMENTE 
-
-
-## Argomenti propagati per tramite segnali
-
-![SignalArguments](../assets/SignalArguments.png)
-
-I segnali possono portare con loro argomenti e parametri essendo dichiarati come dei metodi; 
-A livello di connessione, segnali e slot, possono essere tra loro connessi SOLO quando hanno lo stesso numero di parametri E dello stesso tipo;
-
-Nell'esempio segnale 2 di widget 1 puo esere connesso a slot 2 di widget 2 in quanto vengono passati 2 interi ed attesi 2 interi, al contrario slot 1 di widget 3 che si aspetta una stringa non potrà essere connesso a segnale 2 di widget 1.
-
-Funziona esattamente allo stesso modo del passaggio dei parametri per funzioni;
 
 
 
