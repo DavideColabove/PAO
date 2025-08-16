@@ -14,7 +14,9 @@ Le 5 fasi del workshop comprendono:
 
 Tutte le componenti del Workshop sono presenti nella subfolder [Workshop](Workshop)
 
-### *Visitor*
+--
+
+## **Idea**
 
 ## **Esempio di polimorfismo**
 
