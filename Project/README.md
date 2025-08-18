@@ -13,6 +13,8 @@ Ogni documento fornisce una panoramica teorica e pratica degli strumenti e delle
 | 1  | 📜 **Introduzione a Qt** | Panoramica del framework, architettura e componenti principali | Qt Creator, progetto base, gestione file `.pro` |
 | 2  | 🪟 **Widget e Layout** | Creazione di finestre, pulsanti, etichette e campi di testo | QWidget, QPushButton, QLabel, QLineEdit, QVBoxLayout, QHBoxLayout |
 | 3  | 🔗 **Segnali e Slot** | Meccanismo di comunicazione tra oggetti | connect(), slot personalizzati, gestione eventi |
+| 4/5  | 📚 **Workshop Progetto** | 5 fasi principali di sviluppo di un progetto | Idea, Sketch, Core model, GUI, Report |
+
 
 ---
 
