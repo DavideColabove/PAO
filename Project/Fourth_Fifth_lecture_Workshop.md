@@ -55,11 +55,53 @@ Nella fase di Sketch vengono svolti i seguenti 4 punti:
 In questa fase ci concentriamo sul cuore del modello logico:
 1.  Pianificare le classi, attributi e funzioni (UML?)
 2.  Scriverne il codice
-3.  Eseguire test
+3.  Eseguire test formali
 4.  Ripetere se necessario
 
-Nel nostro esempio [CoreModel](Workshop/CoreModelCode.md) avremo questa struttura
+Nel nostro esempio [CoreModel](Workshop/CoreModelCode.md) avremo questa struttura, in cui notiamo 2 versioni del visitor: un constVisitor ed un Visitor (per invocazioni in metodi costanti)
 
+
+## **GUI Code**
+
+In questa fase svilupperemo la parte grafica seguendo gli stessi principi del core model:
+1.  Pianificare le classi, attributi e funzioni (usando possibilmente UML anche qui)
+2.  Scriverne il codice
+3.  Eseguire test informali
+4.  Ripetere se necessario
+
+
+## **Refinement e Report**
+
+In questa fase si tratteranno le parti di rifinitura del progetto, come la ricerca di asset di qualità, o perfezionamento di algoritmi sketchati nelle fasi precedenti, scorciatoie da tastiera ecc...
+In particolare:
+1.  Rifinire la GUI
+2.  Scegliere gli asset finali
+3.  Prepare un dataset completo 
+4.  Scrivere un report convincete
+
+### *Refinement GUI*
+
+Nello specifico, per il rifinimento della GUI:
+1.  Tool-tips per i pulsanti
+2.  Icone
+3.  Scorciatoie da tastiera
+4.  Colori e stile (UI design), è possibile usare fogli di stile (qss) come css per applicare gli stili ad elementi, classi ed ID
+
+### *Refinement Assets*
+
+Per la versione finale degli asset è bene tenere a mente:
+1.  Usare un aspect ratio e una risoluzione adeguati
+2.  Ottimizzare il loro peso (in KB)
+3.  Utilizzare colori in linea con lo stile generale della GUI
+4.  Le stesse proprietà valgono anche per gli asset multimediali
+
+### *Stesura del report*
+
+Un buon report dovrebbe:
+1.  Far capire facilmente al lettore il soggetto
+2.  Mantenere separati i contenuti personali da quelli tecnici
+3.  Usare immagini quando necessario (UML, grafici ecc..)
+4.  Specificare i contributi 
 
 
 
