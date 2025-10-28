@@ -10,7 +10,7 @@ Tutto il materiale è relativo al corso di Programmazione Ad Oggetti del profess
 
 - [Descrizione](#-descrizione)
 - [Struttura del Repository](#-struttura-del-Repository)
-- [Tecnologie Usate](#-tecnologie-Usate)
+- [Tecnologie Usate](#-tecnologie-usate)
 - [Come Iniziare](#-come-iniziare)
 - [Contributi](#-contributi)
 - [Contatti](#-contatti)
