@@ -9,7 +9,7 @@ Tutto il materiale è relativo al corso di Programmazione Ad Oggetti del profess
 ## 📜 Indice
 
 - [Descrizione](#-descrizione)
-- [Struttura del Repository](#-struttura-del-progetto)
+- [Struttura del Repository](#-struttura-del-Repository)
 - [Tecnologie Usate](#-tecnologie-usate)
 - [Come Iniziare](#-come-iniziare)
 - [Contributi](#-contributi)
@@ -107,7 +107,7 @@ Le risorse didattiche (riassunti) sono organizzate in concomitanza con le lezion
 ### 1. Clona il repository
 
 ```bash
-git clone https://github.com/tuo-username/pao-project.git
+git clone https://github.com/DavideColabove/PAO.git
 cd pao-project
 ```
 
