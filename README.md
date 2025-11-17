@@ -1,6 +1,7 @@
 # 🖥️ Programmazione ad Oggetti (PAO)
 
-Benvenuti nel mio repository dedicato alla **Programmazione ad Oggetti (PAO)**! Qui troverai una collezione di progetti, esercizi e appunti riguardanti il mondo della OOP. 👨‍💻🌐
+Benvenuti nel mio repository dedicato alla **Programmazione ad Oggetti (PAO)**.
+Qui troverai una collezione di progetti, esercizi e appunti riguardanti il mondo della OOP. 👨‍💻🌐
 
 Tutto il materiale è relativo al corso di Programmazione Ad Oggetti del professore Francesco Ranzato A.A.24/25 (SC1167 in Computer Science @UniPD)
 
@@ -8,12 +9,12 @@ Tutto il materiale è relativo al corso di Programmazione Ad Oggetti del profess
 
 ## 📜 Indice
 
-- [Descrizione](#-descrizione)
-- [Struttura del Repository](#-struttura-del-Repository)
-- [Tecnologie Usate](#%EF%B8%8F-tecnologie-usate)
-- [Come Iniziare](#-come-iniziare)
-- [Contributi](#-contributi)
-- [Contatti](#-contatti)
+    - [Descrizione](#-descrizione)
+        - [Struttura del Repository](#-struttura-del-Repository)
+        - [Tecnologie Usate](#%EF%B8%8F-tecnologie-usate)
+            - [Come Iniziare](#-come-iniziare)
+            - [Contributi](#-contributi)
+                - [Contatti](#-contatti)
 
 ---
 
