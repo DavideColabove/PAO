@@ -9,12 +9,12 @@ Tutto il materiale è relativo al corso di Programmazione Ad Oggetti del profess
 
 ## 📜 Indice
 
-    - [Descrizione](#-descrizione)
-        - [Struttura del Repository](#-struttura-del-Repository)
-        - [Tecnologie Usate](#%EF%B8%8F-tecnologie-usate)
-            - [Come Iniziare](#-come-iniziare)
-            - [Contributi](#-contributi)
-                - [Contatti](#-contatti)
+- [Descrizione](#-descrizione)
+- [Struttura del Repository](#-struttura-del-Repository)
+- [Tecnologie Usate](#%EF%B8%8F-tecnologie-usate)
+- [Come Iniziare](#-come-iniziare)
+- [Contributi](#-contributi)
+- [Contatti](#-contatti)
 
 ---
 
