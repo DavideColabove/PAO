@@ -20,12 +20,19 @@ Tutto il materiale è relativo al corso di Programmazione Ad Oggetti del profess
 
 ## 🧩 Descrizione
 
-Questo repository raccoglie esercizi e progetti sviluppati durante il mio percorso di studio. Ogni progetto è costruito utilizzando principi cardine dell’OOP, tra cui:
+Questo repository raccoglie esercizi e progetti sviluppati durante il mio percorso di studio. Ogni progetto è costruito utilizzando principi e concetti fondamentali della programmazione ad oggetti in C++, tra cui:
 
 - **Incapsulamento**
 - **Ereditarietà**
 - **Polimorfismo**
 - **Astrazione**
+- **Template e Generics**
+- **STL (Standard Template Library)**
+- **Design Patterns** (Clone Pattern, Abstract Factory)
+- **Principi SOLID**
+- **Gestione delle Eccezioni**
+- **Multiple Inheritance**
+- **Feature C++11**
 
 ---
 
@@ -91,7 +98,7 @@ PAO/
             persona.h
 ```
 
-Le risorse didattiche (riassunti) sono organizzate in concomitanza con le lezioni del Professore Francesco Ranzato nell'Anno Accademico 2020/21.
+Le risorse didattiche (riassunti) sono organizzate in concomitanza con le lezioni del Professore Francesco Ranzato nell'Anno Accademico 24/25.
 
 ---
 
@@ -109,12 +116,12 @@ Le risorse didattiche (riassunti) sono organizzate in concomitanza con le lezion
 
 ```bash
 git clone https://github.com/DavideColabove/PAO.git
-cd pao-project
+cd PAO
 ```
 
 ### 2. Esplora i progetti
 
-Ogni progetto è contenuto nella propria cartella sotto `src/`. Leggi il README specifico di ogni progetto per maggiori dettagli.
+Gli esercizi sono organizzati nelle cartelle `Lectures/`, `Exams/`, `Project/` e `Tutorato/`. Esplora ogni cartella per vedere i diversi progetti ed esercizi.
 
 ---
 
